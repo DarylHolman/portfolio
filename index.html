@@ -1,233 +1,857 @@
-<!doctype html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
-<!--[if gt IE 8]><!-->
-<html class="no-js" lang="">
-<!--<![endif]-->
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
 <head>
-  <meta property="og:image" content="images/whatsinaname.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JustDaryl</title>
+    <link rel="icon" href="images/justdarylfavicon1.png" type="images/justdarylfavicon1.png"/>
+    <meta name="description">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+     <meta property="og:image" content="images/whatsinaname.png">
 <meta property="og:image:type" content="images/whatsinaname.png">
-<meta property="og:image:width" content="200">
-<meta property="og:image:height" content="200">
-<meta charset="utf-8">
-<meta name="description" content="">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>JustDaryl</title>
-<link rel="icon" href="images/justdarylfavicon1.png" type="images/justdarylfavicon1.png"/>
-<link rel="stylesheet" href="css/bootstrap.min.css">
-<link rel="stylesheet" href="css/jquery.fancybox.css">
-<link rel="stylesheet" href="css/main.css">
-<link rel="stylesheet" href="css/responsive.css">
-<link rel="stylesheet" href="css/animate.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.lgrckt-in.com/LogRocket.min.js" crossorigin="anonymous"></script>
+<script>window.LogRocket && window.LogRocket.init('ph1hrq/portfolio');</script>
+    <style>
+        :root {
+            --bg-color: #0d0d0d;
+            --text-color: #e5e5e5;
+            --accent-color: #4a4a4a;
+        }
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Manrope', sans-serif;
+            cursor: none; /* Custom cursor container */
+            overflow: hidden; /* Prevent body scrolling */
+            height: 100vh;
+        }
+        
+        /* Layout Fixes: Ensure Main Content is correctly positioned between fixed header and bottom line */
+        header {
+            height: 72px; /* Approximate height based on p-6 */
+        }
+        @media (min-width: 768px) {
+            header {
+                height: 90px; /* Approximate height based on py-8 */
+            }
+        }
+
+        #main-content {
+            /* Fixed position relative to the viewport, NO SCROLLING */
+            position: fixed; 
+            top: 72px; 
+            left: 0;
+            right: 0;
+            bottom: 2px; 
+            overflow-y: hidden; /* Disabled scrolling as requested */
+            /* Padding moved from here to the content-container for full-bleed sections */
+        }
+        @media (min-width: 768px) {
+            #main-content {
+                top: 90px; 
+            }
+        }
+        
+        /* Custom Cursor */
+        .cursor-dot,
+        .cursor-outline {
+            position: fixed;
+            top: 0;
+            left: 0;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            z-index: 9999;
+            pointer-events: none;
+        }
+        .cursor-dot {
+            width: 8px;
+            height: 8px;
+            background-color: white;
+        }
+        .cursor-outline {
+            width: 40px;
+            height: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            transition: width 0.2s, height 0.2s, background-color 0.2s;
+        }
+        
+        /* Marquee Animation */
+        .marquee-section {
+            overflow: hidden;
+            white-space: nowrap;
+            position: relative;
+        }
+        .marquee-content {
+            display: inline-flex;
+            align-items: center;
+            animation: marquee 40s linear infinite;
+        }
+
+        /* Project Image Wrapper (Clickable element) */
+        .marquee-image-wrapper {
+            width: 190px;
+            height: 120px;
+            margin-right: 12px;
+            position: relative;
+            border-radius: 4px;
+            overflow: hidden;
+            flex-shrink: 0;
+            cursor: pointer; /* Indicate clickability */
+        }
+
+        .marquee-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            /* Default state: Desaturated and slightly darker */
+            filter: grayscale(100%) brightness(0.8);
+            transition: filter 0.3s ease, transform 0.3s ease;
+        }
+        
+        /* Hover effect applied to the wrapper, making the image full color and slightly enlarged */
+        .marquee-image-wrapper:hover .marquee-image {
+            filter: grayscale(0%) brightness(1); /* Full color and brightness */
+            transform: scale(1.08); /* Slightly more enlargement for impact */
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* Credentials Panel Transition */
+        #credentials-panel {
+            transition: transform 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+        }
+        
+        /* Smooth reveal for content */
+        /* Used to fade in the non-hero content immediately */
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Modal specific styles */
+        .modal-overlay {
+            background-color: rgba(0, 0, 0, 0.8);
+            transition: opacity 0.3s;
+        }
+        .modal-content {
+            transition: transform 0.3s ease-out;
+        }
+        .hidden-modal {
+            opacity: 0;
+            pointer-events: none;
+        }
+        /* Style for the native dialog backdrop */
+        dialog::backdrop {
+            background-color: rgba(0, 0, 0, 0.6);
+        }
+        /* Style the dialog itself to match the dark theme */
+        dialog {
+            border: none;
+            padding: 0;
+            border-radius: 0.75rem; /* rounded-xl */
+            max-width: 90vw;
+            width: 400px;
+            background-color: #1a1a1a; /* Dark background matching modal */
+            color: var(--text-color);
+        }
+    </style>
 </head>
+<body class="antialiased selection:bg-white selection:text-black">
 
-<body>
-<!-- Header Section -->
-<section class="banner" role="banner"> 
-  <!-- Navigation Section -->
-  <header id="header">
-    <div class="header-content clearfix"> <img src="images/justdarylco.png" style="width:200px; margin-top: -20px; margin-left: -20px;" href="#"/> </a>
-      <nav class="navigation" role="navigation">
-        <ul class="primary-nav">
-          <li><a href="#introduction">About Me</a></li>
-          <li><a href="#works">Latest Works</a></li>
-          <li><a href="#contact">HMU</a></li>
-        </ul>
-      </nav>
-      <a href="#" class="nav-toggle">Menu<span></span></a> </div>
-  </header>
-  <!-- Navigation Section --> 
-  <!-- Banner Section -->
-  <div class="container">
-    <div class="col-md-7 banner-inner-wrapper">
-      <div class="banner-text">
-        <h1>I'm Daryl. A Freelance Creative Director.</h1>
-        <p>29. Big Brother. App Creator. Afro Enthusiast. Professional Thrifter. Bitcoin Investor. Serial Protester. Conspiracy Theorist. BA. MPA.</p>
-        <a href="#" class="btn">Keep Goin'</a> </div>
-      <!-- banner text --> 
-    </div>
-  </div>
-  <!-- Banner Section --> 
-</section>
-<!-- Header Section --> 
-<!-- Intro Section -->
-<section id="introduction" class="section introduction">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-4 col-sm-6">
-        <div class="intro-content">
-          <h1>Back in the City and Working on Something New!</h1>
-        </div>
-      </div>
-      <div class="col-md-5 col-sm-6">
-        <div class="intro-content">
-          <p>If you're looking for a professional bio, you might want to visit my LinkedIn. I pay the bills on this domain, so what you're witnessing is my story exactly as I want to tell it...</p>
-          <p>Never really imagined I would get paid for art growing up. Still kinda weird thinking about it..so how'd it happen, right? In between my 1st and 2nd year of grad school, I didnt have the cutest opportunities that students from others schools get over the summer. Rather than letting that failure hold me back, I started to teach myself graphic and web design. </p>
-          <p>My new skills and a plug from good friend led to my first role as a marketing lead. I knocked it out the park. My passion for Black owned business led me to quickly transition to taking on more work with the Ypsilanti/ Ann Arbor Black Chamber of Commerce. After I left grad school, I headed straight to New York City to continue my work at the Harlem Business Alliance. Working at HBA was like a dream, I was surrounded by a close-knit team in the epicenter of Blackness. What more could a Blerd millenial ask for? </p>
-          <p>The opportunity to continue that work with other Black companies and organizations that need help developing their digital presence.</p>
-        </div>
-      </div>
-      <div class="col-md-3 col-sm-6">
-        <div class="intro-content">
-          <h4>my expertise</h4>
-          <ul>
-            <li> - Web Design and Development</li>
-            <li> - Mobile Application Development</li>
-            <li> - Branding</li>
-            <li> - Graphic Design</li>
-            <li> - Videography</li>
-            <li> - Photography</li>
-            <li> - Social Media Management</li>
-            <li> - UX/UI</li>
-            <li> - Español</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- Intro Section --> 
+    <!-- Custom Cursor Elements --><div class="cursor-dot hidden md:block"></div>
+    <div class="cursor-outline hidden md:block"></div>
 
-<!-- work section -->
-<section id="works" class="works section no-padding">
-  <div class="container-fluid">
-    <div class="row no-gutter">
-      <div class="col-lg-2 col-md-4 col-sm-4 work"> <a href="images/work-1.jpg" class="work-box"> <img src="images/work-1.jpg" alt="">
-        <div class="overlay">
-          <div class="overlay-caption">
-            <p><i class="fa fa-search-plus fa-2x"></i></p>
-          </div>
-        </div>
-        <!-- overlay --> 
-        </a> </div>
-      <div class="col-lg-2 col-md-4 col-sm-4 work"> <a href="images/work-2.jpg" class="work-box"> <img src="images/work-2.jpg" alt="">
-        <div class="overlay">
-          <div class="overlay-caption">
-            <p><i class="fa fa-search-plus fa-2x"></i></p>
-          </div>
-        </div>
-        <!-- overlay --> 
-        </a> </div>
-      <div class="col-lg-2 col-md-4 col-sm-4 work"> <a href="images/work-3.jpg" class="work-box"> <img src="images/work-3.jpg" alt="">
-        <div class="overlay">
-          <div class="overlay-caption">
-            <p><i class="fa fa-search-plus fa-2x"></i></p>
-          </div>
-        </div>
-        <!-- overlay --> 
-        </a> </div>
-      <div class="col-lg-2 col-md-4 col-sm-4 work"> <a href="images/work-4.jpg" class="work-box"> <img src="images/work-4.jpg" alt="">
-        <div class="overlay">
-          <div class="overlay-caption">
-            <p><i class="fa fa-search-plus fa-2x"></i></p>
-          </div>
-        </div>
-        <!-- overlay --> 
-        </a> </div>
-      <div class="col-lg-2 col-md-4 col-sm-4 work"> <a href="images/work-5.jpg" class="work-box"> <img src="images/work-5.jpg" alt="">
-        <div class="overlay">
-          <div class="overlay-caption">
-            <p><i class="fa fa-search-plus fa-2x"></i></p>
-          </div>
-        </div>
-        <!-- overlay --> 
-        </a> </div>
-      <div class="col-lg-2 col-md-4 col-sm-4 work"> <a href="images/work-6.jpg" class="work-box"> <img src="images/work-6.jpg" alt="">
-        <div class="overlay">
-          <div class="overlay-caption">
-            <p><i class="fa fa-search-plus fa-2x"></i></p>
-          </div>
-        </div>
-        <!-- overlay --> 
-        </a> </div>
-      <div class="col-lg-2 col-md-4 col-sm-4 work"> <a href="images/work-7.jpg" class="work-box"> <img src="images/work-7.jpg" alt="">
-        <div class="overlay">
-          <div class="overlay-caption">
-            <p><i class="fa fa-search-plus fa-2x"></i></p>
-          </div>
-        </div>
-        <!-- overlay --> 
-        </a> </div>
-      <div class="col-lg-2 col-md-4 col-sm-4 work"> <a href="images/work-8.jpg" class="work-box"> <img src="images/work-8.jpg" alt="">
-        <div class="overlay">
-          <div class="overlay-caption">
-            <p><i class="fa fa-search-plus fa-2x"></i></p>
-          </div>
-        </div>
-        <!-- overlay --> 
-        </a> </div>
-      <div class="col-lg-2 col-md-4 col-sm-4 work"> <a href="images/work-9.jpg" class="work-box"> <img src="images/work-9.jpg" alt="">
-        <div class="overlay">
-          <div class="overlay-caption">
-            <p><i class="fa fa-search-plus fa-2x"></i></p>
-          </div>
-        </div>
-        <!-- overlay --> 
-        </a> </div>
-      <div class="col-lg-2 col-md-4 col-sm-4 work"> <a href="images/work-10.jpg" class="work-box"> <img src="images/work-10.jpg" alt="">
-        <div class="overlay">
-          <div class="overlay-caption">
-            <p><i class="fa fa-search-plus fa-2x"></i></p>
-          </div>
-        </div>
-        <!-- overlay --> 
-        </a> </div>
-      <div class="col-lg-2 col-md-4 col-sm-4 work"> <a href="images/work-11.jpg" class="work-box"> <img src="images/work-11.jpg" alt="">
-        <div class="overlay">
-          <div class="overlay-caption">
-            <p><i class="fa fa-search-plus fa-2x"></i></p>
-          </div>
-        </div>
-        <!-- overlay --> 
-        </a> </div>
-      <div class="col-lg-2 col-md-4 col-sm-4 work"> <a href="images/work-12.jpg" class="work-box"> <img src="images/work-12.jpg" alt="">
-        <div class="overlay">
-          <div class="overlay-caption">
-            <p><i class="fa fa-search-plus fa-2x"></i></p>
-          </div>
-        </div>
-        <!-- overlay --> 
-        </a> </div>
-    </div>
-  </div>
-</section>
-<!-- work section --> 
+    <!-- Fixed Header / Navigation --><header class="fixed top-0 left-0 w-full z-50 mix-blend-difference text-white pointer-events-none bg-[#0d0d0d]/80 backdrop-blur-sm border-b border-white/10 md:border-none">
+        <!-- The header's content is now split between the Name (left) and a container for everything else (right) -->
+        <div class="p-6 md:p-10 md:py-8 flex justify-between items-start gap-8"> 
+            
+            <!-- Left Side: Name/Title + Photo -->
+            <div class="pointer-events-auto w-auto flex-shrink-0 flex items-center gap-4">
+                <!-- Profile Photo Placeholder -->
+                <div class="w-10 h-10 rounded-full bg-gray-700 overflow-hidden border border-white/20">
+                    <img src="images/dh_headshot2.jpg" alt="DH" class="w-full h-full object-cover">
+                </div>
+                <div>
+                    <h1 class="text-lg font-semibold tracking-tight">Daryl Holman Jr.</h1>
+                    <p class="text-sm text-gray-400">Designer</p>
+                </div>
+            </div>
+            
+            <!-- Right Side Container: Holds Credentials (Desktop), Contact, and Mobile Toggle -->
+            <div class="flex items-start gap-8 pointer-events-auto">
 
-<!-- footer section -->
-<footer id="contact" class="footer">
-  <div class="container">
-    <div class="col-md-4">
-      <h4>Contact</h4>
-      <p>275 Malcolm X Blvd New York, NY 10027<br>
-        Text: 269.903.5299 <br>
-        Cashapp: $JustDaryl <br>
-        Email : <a href="mailto:dholmanj@gmail.com"> dholmanj@gmail.com </a></p>
-    </div>
-    <div class="col-md-3">
-      <h4>Out Here AF</h4>
-      <ul class="footer-share">
-        <li><a href="https://twitter.com/_justdaryl" target="_blank"><i class="fa fa-twitter"></i></a></li>
-        <li><a href="https://www.linkedin.com/in/darylholmanjr/" target="_blank"><i class="fa fa-linkedin"></i></a></li>
-        <li><a href="https://github.com/DarylHolman" target="_blank"><i class="fa fa-github"></i></a></li>
-        <li><a href="https://medium.com/@justdaryl/" target="_blank"><i class="fa fa-medium"></i></a></li>
-      </ul>
-    </div>
-    <div class="col-md-5">
-      <p>© 2021 JustDaryl LLC, Daryl Holman Jr. All Rights Reserved<br>
-        Made with <i class="fa fa-heart pulse"></i></a></p>
-    </div>
-  </div>
-</footer>
-<!-- footer section --> 
+                <!-- 1. Desktop Credentials (VISIBLE ON MD+, HIDDEN ON MOBILE) -->
+                <div id="desktop-credentials-inline" 
+                     class="hidden md:grid grid-cols-3 gap-8 text-sm pt-0 transition-all duration-300 ease-in-out transform opacity-100 translate-y-0 max-w-7xl mx-auto">
+                    <!-- 1. Stats -->
+                    <div>
+                        <h4 class="text-xs text-gray-500 uppercase tracking-wider mb-2">Experience</h4>
+                        <div class="flex flex-col space-y-1">
+                            <p class="text-white">Founder at Revival Inc.</p>
+                            <p class="text-white">Robin Hood Foundation Catalyst Fellow</p>
+                            <p class="text-white">Global Good Fund Fellow</p>
+                            <p class="text-white">Halcyon Fellow</p>
+                        </div>
+                    </div>
+                    <!-- 2. Previous Work -->
+                    <div>
+                        <h4 class="text-xs text-gray-500 uppercase tracking-wider mb-2">Previous Work</h4>
+                        <ul class="space-y-1 text-gray-300">
+                            <li>US Senate Panelist</li>
+                            <li>Founder in Residence at Antler+gener8tor</li>
+                            <li>Freelance Designer</li>
+                        </ul>
+                    </div>
+                    <!-- 3. Preferred Stack -->
+                    <div>
+                        <h4 class="text-xs text-gray-500 uppercase tracking-wider mb-2">Expertise</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-2 py-0.5 bg-white/5 rounded text-xs text-gray-300">Web+Graphic Design</span>
+                            <span class="px-2 py-0.5 bg-white/5 rounded text-xs text-gray-300">Mobile App Development</span>
+                            <span class="px-2 py-0.5 bg-white/5 rounded text-xs text-gray-300">Consumer Finance</span>
+                            <span class="px-2 py-0.5 bg-white/5 rounded text-xs text-gray-300">Debt Markets</span>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                        <h4 class="text-xs text-gray-500 uppercase tracking-wider mb-2">Connect</h4>
+                        <div class="flex flex-col space-y-1 text-gray-300">
+                            <a href="https://www.linkedin.com/in/darylholmanjr/">LinkedIn</a>
+                            <a href="mailto:dholmanj@gmail.com">Email</a>
+                            <a href="#">GitHub</a>
+                </div>
+                    </div>
+                </div>
 
-<!-- JS FILES --> 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> 
-<script src="js/bootstrap.min.js"></script> 
-<script src="js/jquery.fancybox.pack.js"></script> 
-<script src="js/retina.min.js"></script> 
-<script src="js/modernizr.js"></script> 
-<script src="js/main.js"></script>
+                <!-- 2. Controls Container -->
+                <div class="flex items-center gap-6">
+                    <!-- Contact Link: NOW TRIGGERS IN-PAGE MODAL -->
+                    <a href="#" id="contact-link" class="text-sm uppercase tracking-widest hover:text-gray-300 transition-colors pt-1 md:pt-0">
+                       
+                    </a>
+                    
+                    <!-- Credentials Button: Mobile Only -->
+                    <button id="credentials-btn" class="group flex items-center gap-2 text-sm uppercase tracking-widest hover:text-gray-300 transition-colors md:hidden">
+                        <span id="credentials-text">Credentials</span>
+                        <span id="credentials-icon" class="bg-white text-black w-5 h-5 flex items-center justify-center rounded-sm text-xs font-bold transition-transform group-hover:rotate-90">+</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Credentials Panel (Mobile Slide Overlay) --><div id="credentials-panel" class="fixed inset-y-0 right-0 w-full md:w-[500px] bg-[#111] z-40 transform translate-x-full overflow-y-auto border-l border-white/10 p-8 md:p-12 pt-32 shadow-2xl md:hidden">
+        <div class="space-y-12 fade-content opacity-0 transition-opacity duration-700 delay-300">
+            <!-- Profile --><div class="flex items-center gap-4 border-t border-white/10 pt-8">
+                <div class="w-16 h-16 bg-gray-800 rounded-full overflow-hidden">
+                    <img src="images/dh_headshot2.jpg" alt="Profile" class="w-full h-full object-cover">
+                </div>
+                <div>
+                    <h3 class="font-medium text-white">Daryl Holman Jr.</h3>
+                    <p class="text-gray-400 text-sm">Based in Harlem NYC 🗽</p>
+                </div>
+            </div>
+
+            <!-- Detailed Stats --><div class="grid grid-cols-2 gap-y-8 gap-x-4 border-t border-white/10 pt-8">
+                <div>
+                    <p class="text-xs text-gray-500 uppercase tracking-wider mb-1">Experience</p>
+                    <p class="text-white">Freelance since 2021</p>
+                </div>
+                <div>
+                    <p class="text-xs text-gray-500 uppercase tracking-wider mb-1">Revenue</p>
+                    <p class="text-white">£1M+ Generated</p>
+                </div>
+                <div>
+                    <p class="text-xs text-gray-500 uppercase tracking-wider mb-1">Avg Project</p>
+                    <p class="text-white">~£12.5k</p>
+                </div>
+                <div>
+                    <p class="text-xs text-gray-500 uppercase tracking-wider mb-1">Recognition</p>
+                    <p class="text-white">13x Site of the Day</p>
+                </div>
+            </div>
+
+            <!-- Previous Agencies --><div class="border-t border-white/10 pt-8">
+                <h4 class="text-xs text-gray-500 uppercase tracking-wider mb-4">Previous Work</h4>
+                <ul class="space-y-2 text-sm text-gray-300">
+                    <li>Show + Tell Agency</li>
+                    <li>Creode Agency</li>
+                    <li>In-House Brands</li>
+                </ul>
+            </div>
+
+            <!-- Preferred Stack --><div class="border-t border-white/10 pt-8">
+                <h4 class="text-xs text-gray-500 uppercase tracking-wider mb-4">Preferred Stack</h4>
+                <div class="flex flex-wrap gap-2">
+                    <span class="px-3 py-1 bg-white/5 rounded-full text-xs text-gray-300">Vite</span>
+                    <span class="px-3 py-1 bg-white/5 rounded-full text-xs text-gray-300">GSAP</span>
+                    <span class="px-3 py-1 bg-white/5 rounded-full text-xs text-gray-300">Lenis</span>
+                    <span class="px-3 py-1 bg-white/5 rounded-full text-xs text-gray-300">Tailwind</span>
+                    <span class="px-3 py-1 bg-white/5 rounded-full text-xs text-gray-300">React</span>
+                </div>
+            </div>
+
+            <!-- Connect --><div class="border-t border-white/10 pt-8">
+                <h4 class="text-xs text-gray-500 uppercase tracking-wider mb-4">Connect</h4>
+                <div class="flex flex-col space-y-2">
+                    <a href="#" class="text-lg text-white hover:text-gray-400 transition-colors">LinkedIn ↗</a>
+                    <a href="mailto:dholmanj@gmail.com" class="text-lg text-white hover:text-gray-400 transition-colors">Email ↗</a>
+                    <a href="#" class="text-lg text-white hover:text-gray-400 transition-colors">GitHub ↗</a>
+                </div>
+            </div>
+
+            <!-- Clients --><div class="border-t border-white/10 pt-8 pb-20">
+                <h4 class="text-xs text-gray-500 uppercase tracking-wider mb-4">Selected Clients</h4>
+                <p class="text-sm text-gray-400 leading-relaxed">
+                    PayPal
+                </p>
+            </div>
+        </div>
+    </div>
+
+       <!-- Main Content Wrapper -->
+    <main id="main-content" class="flex flex-col transition-transform duration-500">
+            <!-- Hero Section (Centered Vertically in available space, Flush Left) -->
+            <div class="flex-grow flex flex-col justify-center">
+                <section id="hero-section" class="max-w-4xl mr-auto mb-6">
+                    <div id="scroll-flash-text" 
+                         class="text-2xl md:text-4xl lg:text-5xl font-light leading-snug text-gray-300"
+                         data-original-text="My work typically lands where technology and impact come together-currently building in fintech and economic mobility.">
+                    </div>
+                    <p class="mt-8 text-xl md:text-3xl font-light text-gray-500 leading-relaxed">
+                        Outside of work, I'm usually either running(begrudgingly, of course), playing basketball or looking forward to my family's next road trip.
+                    </p>
+                </section>
+            </div>
+
+            <!-- Project Toggle (Sits at bottom of this container, just above photos) -->
+            
+        </div>
+        <div>
+            <section class="w-full mb-4 fade-in-up flex justify-center" style="">
+                <div class="flex items-center justify-center gap-2 text-xs uppercase tracking-widest border-b border-white/10 pb-4">
+                    <button id="toggle-primary" class="toggle-btn px-2 py-0.5 rounded-full font-semibold bg-white text-black transition-colors">Work</button>
+                    <button id="toggle-secondary" class="toggle-btn px-2 py-0.5 rounded-full text-gray-400 hover:text-white transition-colors">Extra Curriculars</button>
+                </div>
+            </section>
+        </div>
+
+        <!-- Marquee Section 1: Client Work (Default) -->
+        <section id="marquee-primary" 
+                 class="marquee-section w-full py-6 overflow-hidden fade-in-up 
+                        mx-[-10] md:mx-[-6]" 
+                 style="animation-delay: 0.1s;">
+            <div class="marquee-container">
+                <div class="marquee-content">
+                    
+                    <!-- Client Work Images (repeated for seamless loop) -->
+                    <div data-project-id="ui-revamp" class="marquee-image-wrapper group">
+                        <img src="images/work-1.jpg" class="marquee-image" alt="Modern UI/UX Project">
+                    </div>
+                    
+                    <div data-project-id="3d-art" class="marquee-image-wrapper group">
+                        <img src="images/work-2.jpg" class="marquee-image" alt="Abstract Website Design">
+                    </div>
+
+                    <div data-project-id="ecommerce" class="marquee-image-wrapper group">
+                        <img src="images/work-3.jpg" class="marquee-image" alt="Stylish E-commerce Site">
+                    </div>
+
+                    <div data-project-id="landing-page" class="marquee-image-wrapper group">
+                        <img src="images/work-4.jpg" class="marquee-image" alt="Minimalist Landing Page">
+                    </div>
+
+                    <div data-project-id="mobile-app" class="marquee-image-wrapper group">
+                        <img src="images/work-5.jpg" class="marquee-image" alt="Mobile App/Tablet View">
+                    </div>
+                    
+                    <!-- Duplicates -->
+                    <div data-project-id="ui-revamp" class="marquee-image-wrapper group">
+                        <img src="images/work-6.jpg" class="marquee-image" alt="Modern UI/UX Project">
+                    </div>
+                    <div data-project-id="3d-art" class="marquee-image-wrapper group">
+                        <img src="images/work-7.jpg" class="marquee-image" alt="Abstract Website Design">
+                    </div>
+                    <div data-project-id="ecommerce" class="marquee-image-wrapper group">
+                        <img src="images/work-8.jpg" class="marquee-image" alt="Stylish E-commerce Site">
+                    </div>
+                    <div data-project-id="landing-page" class="marquee-image-wrapper group">
+                        <img src="images/work-9.jpg" class="marquee-image" alt="Minimalist Landing Page">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Marquee Section 2: Personal Projects -->
+        <section id="marquee-secondary" 
+                 class="marquee-section w-full py-6 overflow-hidden fade-in-up 
+                        mx-[-10] md:mx-[-6]" 
+                 style="animation-delay: 0.5s; display: none;">
+            <div class="marquee-container">
+                <div class="marquee-content">
+                    <div data-project-id="art-generator" class="marquee-image-wrapper group">
+                        <img src="images/play-1.jpg" class="marquee-image" alt="Personal 1">
+                    </div>
+                    <div data-project-id="portfolio-v4" class="marquee-image-wrapper group">
+                        <img src="images/play-2.jpg" class="marquee-image" alt="Personal 2">
+                    </div>
+                    <div data-project-id="cli-utility" class="marquee-image-wrapper group">
+                        <img src="images/play-3.jpg" class="marquee-image" alt="Personal 3">
+                    </div>
+                    <div data-project-id="chess-ai" class="marquee-image-wrapper group">
+                        <img src="images/play-4.jpg" class="marquee-image" alt="Personal 4">
+                    </div>
+                    <div data-project-id="coder-sandbox" class="marquee-image-wrapper group">
+                        <img src="images/play-5.jpg" class="marquee-image" alt="Personal 5">
+                    </div>
+
+                    <!-- Duplicates -->
+                    <div data-project-id="2024-marathon" class="marquee-image-wrapper group">
+                        <img src="images/play-6.jpg" class="marquee-image" alt="Personal 1">
+                    </div>
+                    <div data-project-id="portfolio-v4" class="marquee-image-wrapper group">
+                        <img src="images/play-7.jpg" class="marquee-image" alt="Personal 2">
+                    </div>
+                    <div data-project-id="portfolio-v4" class="marquee-image-wrapper group">
+                        <img src="images/play-8.jpg" class="marquee-image" alt="Personal 2">
+                    </div>
+                    <div data-project-id="portfolio-v4" class="marquee-image-wrapper group">
+                        <img src="images/play-9.jpg" class="marquee-image" alt="Personal 2">
+                    </div>
+                    <div data-project-id="portfolio-v4" class="marquee-image-wrapper group">
+                        <img src="images/play-10.jpg" class="marquee-image" alt="Personal 2">
+                    </div>
+                    <div data-project-id="portfolio-v4" class="marquee-image-wrapper group">
+                        <img src="images/play-11.jpg" class="marquee-image" alt="Personal 2">
+                    </div>
+                    <div data-project-id="portfolio-v4" class="marquee-image-wrapper group">
+                        <img src="images/play-12.jpg" class="marquee-image" alt="Personal 2">
+                    </div>
+                    <div data-project-id="portfolio-v4" class="marquee-image-wrapper group">
+                        <img src="images/play-13.jpg" class="marquee-image" alt="Personal 2">
+                    </div>
+                    <div data-project-id="portfolio-v4" class="marquee-image-wrapper group">
+                        <img src="images/play-14.jpg" class="marquee-image" alt="Personal 2">
+                    </div>
+                    <!-- <div data-project-id="portfolio-v4" class="marquee-image-wrapper group">
+                        <img src="images/play-15.jpg" class="marquee-image" alt="Personal 2">
+                    </div>
+                    <div data-project-id="portfolio-v4" class="marquee-image-wrapper group">
+                        <img src="images/play-16.jpg" class="marquee-image" alt="Personal 2"> -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <div id="footer-container" class="px-6 md:px-10 text-center">
+            <div class="text-xs text-gray-600 pt-4 pb-4">
+                &copy; 2026 JustDaryl LLC. All Rights Reserved.
+            </div>
+        </div>
+    </main>
+    
+    <!-- Project Details Modal --><div id="project-modal" class="fixed inset-0 z-[100] flex items-center justify-center p-4 modal-overlay hidden-modal" onclick="closeModal(event)">
+        <div class="modal-content w-full max-w-3xl bg-[#1a1a1a] rounded-xl shadow-2xl p-6 md:p-8 transform scale-95 opacity-0 transition-all duration-300 ease-out" onclick="event.stopPropagation()">
+            
+            <div class="flex justify-between items-start border-b border-white/10 pb-4 mb-4">
+                <div>
+                    <h2 id="modal-title" class="text-3xl font-semibold text-white">Project Title</h2>
+                    <p id="modal-role" class="text-sm text-gray-400 mt-1">Role: Developer</p>
+                </div>
+                <button id="modal-close-btn" class="p-2 -mr-2 text-white/70 hover:text-white transition-colors" onclick="closeModal()">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
+            </div>
+            
+            <div class="mb-6 rounded-lg overflow-hidden border border-white/10 shadow-lg">
+                <img id="modal-image" 
+                     src="" 
+                     alt="Project Visual" 
+                     class="w-full h-auto object-cover max-h-[35vh] md:max-h-[45vh]" 
+                     onerror="this.onerror=null; this.src='https://placehold.co/800x400/1e293b/f8fafc?text=Image+Unavailable';" />
+            </div>
+
+            <div class="space-y-6">
+                <div>
+                    <h4 class="text-xs text-gray-500 uppercase tracking-widest mb-2">Project Details</h4>
+                    <p id="modal-description" class="text-gray-300 leading-relaxed text-base">
+                        This is where the long-form description of the project will go, explaining the challenges, solutions, and impact.
+                    </p>
+                </div>
+
+                <div>
+                    <h4 class="text-xs text-gray-500 uppercase tracking-widest mb-2">Technology Used</h4>
+                    <div id="modal-tech-stack" class="flex flex-wrap gap-2"></div>
+                </div>
+
+                <a id="modal-live-link" href="#" target="_blank" class="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-white hover:text-green-400 transition-colors border-t border-white/10 pt-4 mt-4">
+                    View Live Project
+                    <i data-lucide="external-link" class="w-4 h-4"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Dialog (New Element for the Contact link) -->
+    <dialog id="contact-dialog">
+        <div class="p-6 md:p-8">
+            <h2 class="text-2xl font-semibold text-white border-b border-white/10 pb-3 mb-4">Let's Talk</h2>
+            
+            <p class="text-gray-300 mb-6">
+                I'm currently unavailable for freelance projects and new agency partnerships.
+            </p>
+
+            <div class="space-y-4 text-sm">
+                <div>
+                    <p class="text-gray-500 uppercase tracking-wider mb-1">Email</p>
+                    <a href="mailto:dholmanj@gmail.com" class="text-white text-lg hover:text-green-400 transition-colors flex items-center gap-2">
+                        dholmanj@gmail.com
+                        <i data-lucide="mail" class="w-4 h-4"></i>
+                    </a>
+                </div>
+                <div>
+                    <p class="text-gray-500 uppercase tracking-wider mb-1">LinkedIn</p>
+                    <a href="#" target="_blank" class="text-white text-lg hover:text-green-400 transition-colors flex items-center gap-2">
+                        /in/darylholmanjr
+                        <i data-lucide="linkedin" class="w-4 h-4"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="mt-8 flex justify-end">
+                <button onclick="document.getElementById('contact-dialog').close()"
+                    class="py-2 px-4 bg-gray-700 text-white font-medium rounded-lg hover:bg-gray-600 transition duration-200 text-sm">
+                    Close
+                </button>
+            </div>
+        </div>
+    </dialog>
+
+
+    <!-- Design Element: Fixed Bottom Line --><div class="fixed bottom-0 left-0 w-full h-2 z-[101]" style="background-color: #6b2737;"></div>
+
+    <script>
+        // --- Icons ---
+        lucide.createIcons();
+
+        // --- Project Data (Truncated for brevity, full data retained) ---
+        const projectsData = {
+            'ui-revamp': {
+                title: 'Michigan Black Chamber of Commerce',
+                role: 'Designer+MPA Intern',
+                tech: ['Adobe Photoshop'],
+                description: 'Led the complete redesign and implementation of a complex enterprise dashboard, focusing on accessibility, performance, and modern design principles. Key achievements include a 40% reduction in average task completion time for core users and a perfect Lighthouse accessibility score.',
+                imageUrl: 'images/work-1.jpg', 
+                link: '#'
+            },
+            '3d-art': {
+                title: '3D Interactive Art',
+                role: 'Front-End Developer',
+                tech: ['GSAP', 'Three.js', 'WebGL', 'TypeScript'],
+                description: 'Built an immersive, interactive 3D website experience for a luxury brand product launch. The site featured custom shaders and physics-based interactions, winning a Site of the Day award.',
+                imageUrl: 'images/work-2.jpg', 
+                link: '#'
+            },
+            'ecommerce': {
+                title: 'E-commerce Platform',
+                role: 'Full-Stack Developer',
+                tech: ['Next.js', 'Stripe', 'PostgreSQL', 'Vercel'],
+                description: 'Developed a high-performance, full-scope e-commerce platform capable of handling thousands of simultaneous users. Integrated modern payment gateways and a custom inventory management system.',
+                imageUrl: 'images/work-3.jpg', 
+                link: '#'
+            },
+            'landing-page': {
+                title: 'Startup Landing Page',
+                role: 'Front-End Developer',
+                tech: ['Astro', 'TypeScript', 'Tailwind', 'Netlify'],
+                description: 'Created a blazing-fast, content-focused landing page for a new FinTech startup. Focused on extreme performance and SEO optimization, resulting in a 99+ PageSpeed score and high conversion rates.',
+                imageUrl: 'images/work-4.jpg', 
+                link: '#'
+            },
+            'mobile-app': {
+                title: 'Mobile App Design',
+                role: 'UI/UX Designer',
+                tech: ['React Native', 'Expo', 'Figma', 'Redux'],
+                description: 'Designed and prototyped a cross-platform mobile application for event management. The implementation focused on native feel, smooth transitions, and state management optimization for large datasets.',
+                imageUrl: 'images/work-5.jpg', 
+                link: '#'
+            },
+            'art-generator': {
+                title: 'Procedural Art Generator',
+                role: 'Creative Coder',
+                tech: ['Three.js', 'JavaScript', 'Shaders'],
+                description: 'An ongoing personal experiment into algorithmic art generation using WebGL and custom fragment shaders. The goal is to create endless, unique, high-resolution digital wallpapers based on user-defined parameters.',
+                imageUrl: 'images/work-6.jpg', 
+                link: '#'
+            },
+            'portfolio-v4': {
+                title: 'Portfolio V4 Concept',
+                role: 'Personal Project',
+                tech: ['Next.js', 'Framer Motion', 'Lenis'],
+                description: 'A conceptual design and build for my next personal portfolio, focusing heavily on scroll-jacking, physics-based transitions, and large-scale typography driven by Framer Motion and smooth scrolling.',
+                imageUrl: 'images/work-7.jpg', 
+                link: '#'
+            },
+            'cli-utility': {
+                title: 'CLI Automation Utility',
+                role: 'Automation Scripting',
+                tech: ['Node.js', 'TypeScript', 'Yarn', 'Bash'],
+                description: 'A command-line tool designed to automate repetitive development tasks, including boilerplate setup, dependency management, and deployment scripting. Significantly cuts down project setup time.',
+                imageUrl: 'images/work-8.jpg', 
+                link: '#'
+            },
+            'chess-ai': {
+                title: 'Browser Chess AI',
+                role: 'Algorithm Engineer',
+                tech: ['JavaScript', 'Minimax Algorithm', 'Web Workers'],
+                description: 'Implemented a simple chess engine that runs entirely in the browser using a Minimax algorithm with alpha-beta pruning. Utilizes Web Workers for non-blocking UI and fast move calculation.',
+                imageUrl: 'images/work-9.jpg', 
+                link: '#'
+            },
+            'coder-sandbox': {
+                title: 'Coder Sandbox',
+                role: 'Full-Stack Experiment',
+                tech: ['React', 'Deno', 'WebAssembly', 'Prisma'],
+                description: 'A playground for experimenting with code execution environments. Features secure sandboxing of user-submitted code snippets using WebAssembly and serverless back-end functions.',
+                imageUrl: 'images/work-10.jpg', 
+                link: '#'
+            },
+             '2024-marathon': {
+                title: 'Coder Sandbox',
+                role: 'Full-Stack Experiment',
+                tech: ['React', 'Deno', 'WebAssembly', 'Prisma'],
+                description: 'A playground for experimenting with code execution environments. Features secure sandboxing of user-submitted code snippets using WebAssembly and serverless back-end functions.',
+                imageUrl: 'images/play-1.jpg', 
+                link: '#'
+            },
+        };
+
+        
+
+        // --- DOM Elements ---
+        const credentialsBtn = document.getElementById('credentials-btn');
+        const credentialsPanel = document.getElementById('credentials-panel');
+        const credentialsText = document.getElementById('credentials-text');
+        const credentialsIcon = document.getElementById('credentials-icon');
+        const panelContent = credentialsPanel.querySelector('.fade-content');
+        const mainContent = document.getElementById('main-content');
+        const contentContainer = document.getElementById('content-container');
+
+        const marqueePrimary = document.getElementById('marquee-primary');
+        const marqueeSecondary = document.getElementById('marquee-secondary');
+        const togglePrimary = document.getElementById('toggle-primary');
+        const toggleSecondary = document.getElementById('toggle-secondary');
+        const projectMarquees = document.querySelectorAll('.marquee-image-wrapper');
+        const scrollFlashText = document.getElementById('scroll-flash-text');
+
+        const projectModal = document.getElementById('project-modal');
+        const modalTitle = document.getElementById('modal-title');
+        const modalRole = document.getElementById('modal-role');
+        const modalDescription = document.getElementById('modal-description');
+        const modalImage = document.getElementById('modal-image');
+        const modalTechStack = document.getElementById('modal-tech-stack');
+        const modalLiveLink = document.getElementById('modal-live-link');
+        const modalContent = projectModal.querySelector('.modal-content');
+        
+        // NEW CONTACT ELEMENTS
+        const contactLink = document.getElementById('contact-link');
+        const contactDialog = document.getElementById('contact-dialog');
+
+        // --- State ---
+        let isPanelOpen = false;
+        let typewriterExecuted = false;
+
+        // --- Functions ---
+
+        function openModal(projectId) {
+            const project = projectsData[projectId];
+            if (!project) return;
+
+            modalTitle.textContent = project.title;
+            modalRole.textContent = `Role: ${project.role}`;
+            modalDescription.textContent = project.description;
+            modalImage.src = project.imageUrl;
+            modalLiveLink.href = project.link;
+
+            modalTechStack.innerHTML = project.tech.map(tech => 
+                `<span class="px-3 py-1 bg-white/5 rounded-full text-xs text-gray-300">${tech}</span>`
+            ).join('');
+
+            projectModal.classList.remove('hidden-modal');
+            modalContent.offsetWidth; 
+            modalContent.classList.remove('scale-95', 'opacity-0');
+            projectModal.style.opacity = '1';
+        }
+
+        function closeModal(event) {
+            if (event && event.target !== projectModal && event.target !== document.getElementById('modal-close-btn').firstChild) {
+                return; 
+            }
+            
+            modalContent.classList.add('scale-95', 'opacity-0');
+            projectModal.style.opacity = '0';
+
+            setTimeout(() => {
+                projectModal.classList.add('hidden-modal');
+            }, 300); 
+        }
+
+        // NEW: Contact Dialog Functions
+        function openContactDialog(e) {
+            e.preventDefault(); // Stop the default link action
+            contactDialog.showModal();
+        }
+
+        function toggleCredentialsPanel() {
+            if (isPanelOpen) {
+                credentialsPanel.classList.add('translate-x-full');
+                credentialsPanel.classList.remove('translate-x-0');
+                panelContent.classList.add('opacity-0');
+                credentialsText.textContent = 'Credentials';
+                credentialsIcon.textContent = '+';
+                mainContent.style.filter = 'none'; 
+                document.body.style.overflow = 'hidden'; 
+            } else {
+                credentialsPanel.classList.remove('translate-x-full');
+                credentialsPanel.classList.add('translate-x-0');
+                setTimeout(() => panelContent.classList.remove('opacity-0'), 100); 
+                credentialsText.textContent = 'Close';
+                credentialsIcon.textContent = 'x';
+                mainContent.style.filter = 'blur(4px)'; 
+                document.body.style.overflow = 'hidden'; 
+            }
+            isPanelOpen = !isPanelOpen;
+        }
+
+        function toggleMarquee(target) {
+            if (target === 'primary') {
+                marqueePrimary.style.display = 'block';
+                marqueeSecondary.style.display = 'none';
+                togglePrimary.classList.add('bg-white', 'text-black');
+                togglePrimary.classList.remove('text-gray-400', 'hover:text-white');
+                toggleSecondary.classList.remove('bg-white', 'text-black');
+                toggleSecondary.classList.add('text-gray-400', 'hover:text-white');
+            } else {
+                marqueePrimary.style.display = 'none';
+                marqueeSecondary.style.display = 'block';
+                toggleSecondary.classList.add('bg-white', 'text-black');
+                toggleSecondary.classList.remove('text-gray-400', 'hover:text-white');
+                togglePrimary.classList.remove('bg-white', 'text-black');
+                togglePrimary.classList.add('text-gray-400', 'hover:text-white');
+            }
+        }
+
+        function typeWriter(element, text, delay = 40) {
+            let i = 0;
+            function typing() {
+                if (i < text.length) {
+                    element.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(typing, delay);
+                } else {
+                    contentContainer.classList.remove('opacity-0');
+                }
+            }
+            typing();
+        }
+
+        function startTypewriterOnScroll() {
+            if (typewriterExecuted) {
+                return;
+            }
+
+            const originalText = scrollFlashText.getAttribute('data-original-text');
+            scrollFlashText.textContent = ''; // Clear before typing
+            typeWriter(scrollFlashText, originalText);
+            typewriterExecuted = true;
+
+            window.removeEventListener('wheel', startTypewriterOnScroll);
+            window.removeEventListener('touchstart', startTypewriterOnScroll);
+            window.removeEventListener('click', startTypewriterOnScroll);
+        }
+
+        // --- Event Listeners ---
+        credentialsBtn.addEventListener('click', toggleCredentialsPanel);
+        togglePrimary.addEventListener('click', () => toggleMarquee('primary'));
+        toggleSecondary.addEventListener('click', () => toggleMarquee('secondary'));
+        
+        // NEW: Attach listener to the Contact link
+        contactLink.addEventListener('click', openContactDialog);
+
+        document.addEventListener('click', function(e) {
+            const wrapper = e.target.closest('.marquee-image-wrapper');
+            if (wrapper) {
+                const projectId = wrapper.dataset.projectId;
+                openModal(projectId);
+            }
+        });
+        
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                if (!projectModal.classList.contains('hidden-modal')) {
+                    closeModal();
+                }
+                if (contactDialog.open) {
+                    contactDialog.close();
+                }
+            }
+        });
+
+        // Scroll/Touch trigger for typewriter
+        window.addEventListener('wheel', startTypewriterOnScroll, { passive: true });
+        window.addEventListener('touchstart', startTypewriterOnScroll, { passive: true });
+        window.addEventListener('click', startTypewriterOnScroll, { once: true });
+
+        // --- Custom Cursor Logic ---
+        const cursorDot = document.querySelector('.cursor-dot');
+        const cursorOutline = document.querySelector('.cursor-outline');
+        
+        if (cursorDot && cursorOutline) {
+            document.addEventListener('mousemove', (e) => {
+                const x = e.clientX;
+                const y = e.clientY;
+
+                cursorDot.style.left = `${x}px`;
+                cursorDot.style.top = `${y}px`;
+
+                cursorOutline.style.transform = `translate(${x - 20}px, ${y - 20}px)`; 
+                
+                const target = e.target;
+                const isInteractive = target.closest('a, button, .marquee-image-wrapper, .pointer-events-auto');
+
+                if (isInteractive) {
+                    cursorOutline.style.width = '24px';
+                    cursorOutline.style.height = '24px';
+                    cursorOutline.style.border = '1px solid white';
+                    cursorOutline.style.backgroundColor = 'rgba(255, 255, 255, 0.2)';
+                } else {
+                    cursorOutline.style.width = '40px';
+                    cursorOutline.style.height = '40px';
+                    cursorOutline.style.border = '1px solid rgba(255, 255, 255, 0.5)';
+                    cursorOutline.style.backgroundColor = 'transparent';
+                }
+            });
+        }
+        
+        // Initialize with cleared text for effect
+        scrollFlashText.textContent = '';
+        contentContainer.classList.add('opacity-0');
+
+    </script>
 </body>
 </html>
