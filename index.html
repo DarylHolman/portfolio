@@ -9,12 +9,12 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-     <meta property="og:image" content="images/whatsinaname.png">
-<meta property="og:image:type" content="images/whatsinaname.png">
+    <meta property="og:image" content="images/whatsinaname.png">
+    <meta property="og:image:type" content="images/whatsinaname.png">
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
     <script src="https://cdn.lgrckt-in.com/LogRocket.min.js" crossorigin="anonymous"></script>
-<script>window.LogRocket && window.LogRocket.init('ph1hrq/portfolio');</script>
+    <script>window.LogRocket && window.LogRocket.init('ph1hrq/portfolio');</script>
     <style>
         :root {
             --bg-color: #0d0d0d;
@@ -30,25 +30,23 @@
             height: 100vh;
         }
         
-        /* Layout Fixes: Ensure Main Content is correctly positioned between fixed header and bottom line */
+        /* Layout Fixes */
         header {
-            height: 72px; /* Approximate height based on p-6 */
+            height: 72px; 
         }
         @media (min-width: 768px) {
             header {
-                height: 90px; /* Approximate height based on py-8 */
+                height: 90px; 
             }
         }
 
         #main-content {
-            /* Fixed position relative to the viewport, NO SCROLLING */
             position: fixed; 
             top: 72px; 
             left: 0;
             right: 0;
             bottom: 2px; 
-            overflow-y: hidden; /* Disabled scrolling as requested */
-            /* Padding moved from here to the content-container for full-bleed sections */
+            overflow-y: hidden; 
         }
         @media (min-width: 768px) {
             #main-content {
@@ -88,34 +86,33 @@
         .marquee-content {
             display: inline-flex;
             align-items: center;
-            animation: marquee 40s linear infinite;
+            /* Increased duration slightly for smoother infinite loop */
+            animation: marquee 60s linear infinite;
         }
 
-        /* Project Image Wrapper (Clickable element) */
+        /* Square Images */
         .marquee-image-wrapper {
             width: 190px;
-            height: 120px;
+            height: 190px;
             margin-right: 12px;
             position: relative;
             border-radius: 4px;
             overflow: hidden;
             flex-shrink: 0;
-            cursor: pointer; /* Indicate clickability */
+            cursor: pointer; 
         }
 
         .marquee-image {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            /* Default state: Desaturated and slightly darker */
             filter: grayscale(100%) brightness(0.8);
             transition: filter 0.3s ease, transform 0.3s ease;
         }
         
-        /* Hover effect applied to the wrapper, making the image full color and slightly enlarged */
         .marquee-image-wrapper:hover .marquee-image {
-            filter: grayscale(0%) brightness(1); /* Full color and brightness */
-            transform: scale(1.08); /* Slightly more enlargement for impact */
+            filter: grayscale(0%) brightness(1); 
+            transform: scale(1.08); 
         }
 
         @keyframes marquee {
@@ -129,7 +126,6 @@
         }
         
         /* Smooth reveal for content */
-        /* Used to fade in the non-hero content immediately */
         .fade-in-up {
             animation: fadeInUp 0.8s ease-out forwards;
             opacity: 0;
@@ -154,34 +150,31 @@
             opacity: 0;
             pointer-events: none;
         }
-        /* Style for the native dialog backdrop */
+        
         dialog::backdrop {
             background-color: rgba(0, 0, 0, 0.6);
         }
-        /* Style the dialog itself to match the dark theme */
+        
         dialog {
             border: none;
             padding: 0;
-            border-radius: 0.75rem; /* rounded-xl */
+            border-radius: 0.75rem; 
             max-width: 90vw;
             width: 400px;
-            background-color: #1a1a1a; /* Dark background matching modal */
+            background-color: #1a1a1a; 
             color: var(--text-color);
         }
     </style>
 </head>
 <body class="antialiased selection:bg-white selection:text-black">
 
-    <!-- Custom Cursor Elements --><div class="cursor-dot hidden md:block"></div>
+    <div class="cursor-dot hidden md:block"></div>
     <div class="cursor-outline hidden md:block"></div>
 
-    <!-- Fixed Header / Navigation --><header class="fixed top-0 left-0 w-full z-50 mix-blend-difference text-white pointer-events-none bg-[#0d0d0d]/80 backdrop-blur-sm border-b border-white/10 md:border-none">
-        <!-- The header's content is now split between the Name (left) and a container for everything else (right) -->
+    <header class="fixed top-0 left-0 w-full z-50 mix-blend-difference text-white pointer-events-none bg-[#0d0d0d]/80 backdrop-blur-sm border-b border-white/10 md:border-none">
         <div class="p-6 md:p-10 md:py-8 flex justify-between items-start gap-8"> 
             
-            <!-- Left Side: Name/Title + Photo -->
             <div class="pointer-events-auto w-auto flex-shrink-0 flex items-center gap-4">
-                <!-- Profile Photo Placeholder -->
                 <div class="w-10 h-10 rounded-full bg-gray-700 overflow-hidden border border-white/20">
                     <img src="images/dh_headshot2.jpg" alt="DH" class="w-full h-full object-cover">
                 </div>
@@ -191,13 +184,10 @@
                 </div>
             </div>
             
-            <!-- Right Side Container: Holds Credentials (Desktop), Contact, and Mobile Toggle -->
             <div class="flex items-start gap-8 pointer-events-auto">
 
-                <!-- 1. Desktop Credentials (VISIBLE ON MD+, HIDDEN ON MOBILE) -->
                 <div id="desktop-credentials-inline" 
                      class="hidden md:grid grid-cols-3 gap-8 text-sm pt-0 transition-all duration-300 ease-in-out transform opacity-100 translate-y-0 max-w-7xl mx-auto">
-                    <!-- 1. Stats -->
                     <div>
                         <h4 class="text-xs text-gray-500 uppercase tracking-wider mb-2">Experience</h4>
                         <div class="flex flex-col space-y-1">
@@ -207,7 +197,6 @@
                             <p class="text-white">Halcyon Fellow</p>
                         </div>
                     </div>
-                    <!-- 2. Previous Work -->
                     <div>
                         <h4 class="text-xs text-gray-500 uppercase tracking-wider mb-2">Previous Work</h4>
                         <ul class="space-y-1 text-gray-300">
@@ -216,7 +205,6 @@
                             <li>Freelance Designer</li>
                         </ul>
                     </div>
-                    <!-- 3. Preferred Stack -->
                     <div>
                         <h4 class="text-xs text-gray-500 uppercase tracking-wider mb-2">Expertise</h4>
                         <div class="flex flex-wrap gap-2">
@@ -228,23 +216,17 @@
                     </div>
                 </div>
                 <div>
-                        <h4 class="text-xs text-gray-500 uppercase tracking-wider mb-2">Connect</h4>
-                        <div class="flex flex-col space-y-1 text-gray-300">
-                            <a href="https://www.linkedin.com/in/darylholmanjr/">LinkedIn</a>
-                            <a href="mailto:dholmanj@gmail.com">Email</a>
-                            <a href="#">GitHub</a>
-                </div>
+                    <h4 class="text-xs text-gray-500 uppercase tracking-wider mb-2">Connect</h4>
+                    <div class="flex flex-col space-y-1 text-gray-300">
+                        <a href="https://www.linkedin.com/in/darylholmanjr/">LinkedIn</a>
+                        <a href="mailto:dholmanj@gmail.com">Email</a>
+                        <a href="#">GitHub</a>
                     </div>
                 </div>
 
-                <!-- 2. Controls Container -->
                 <div class="flex items-center gap-6">
-                    <!-- Contact Link: NOW TRIGGERS IN-PAGE MODAL -->
-                    <a href="#" id="contact-link" class="text-sm uppercase tracking-widest hover:text-gray-300 transition-colors pt-1 md:pt-0">
-                       
-                    </a>
+                    <a href="#" id="contact-link" class="text-sm uppercase tracking-widest hover:text-gray-300 transition-colors pt-1 md:pt-0"></a>
                     
-                    <!-- Credentials Button: Mobile Only -->
                     <button id="credentials-btn" class="group flex items-center gap-2 text-sm uppercase tracking-widest hover:text-gray-300 transition-colors md:hidden">
                         <span id="credentials-text">Credentials</span>
                         <span id="credentials-icon" class="bg-white text-black w-5 h-5 flex items-center justify-center rounded-sm text-xs font-bold transition-transform group-hover:rotate-90">+</span>
@@ -254,9 +236,9 @@
         </div>
     </header>
 
-    <!-- Credentials Panel (Mobile Slide Overlay) --><div id="credentials-panel" class="fixed inset-y-0 right-0 w-full md:w-[500px] bg-[#111] z-40 transform translate-x-full overflow-y-auto border-l border-white/10 p-8 md:p-12 pt-32 shadow-2xl md:hidden">
+    <div id="credentials-panel" class="fixed inset-y-0 right-0 w-full md:w-[500px] bg-[#111] z-40 transform translate-x-full overflow-y-auto border-l border-white/10 p-8 md:p-12 pt-32 shadow-2xl md:hidden">
         <div class="space-y-12 fade-content opacity-0 transition-opacity duration-700 delay-300">
-            <!-- Profile --><div class="flex items-center gap-4 border-t border-white/10 pt-8">
+            <div class="flex items-center gap-4 border-t border-white/10 pt-8">
                 <div class="w-16 h-16 bg-gray-800 rounded-full overflow-hidden">
                     <img src="images/dh_headshot2.jpg" alt="Profile" class="w-full h-full object-cover">
                 </div>
@@ -266,7 +248,7 @@
                 </div>
             </div>
 
-            <!-- Detailed Stats --><div class="grid grid-cols-2 gap-y-8 gap-x-4 border-t border-white/10 pt-8">
+            <div class="grid grid-cols-2 gap-y-8 gap-x-4 border-t border-white/10 pt-8">
                 <div>
                     <p class="text-xs text-gray-500 uppercase tracking-wider mb-1">Experience</p>
                     <p class="text-white">Freelance since 2021</p>
@@ -285,7 +267,7 @@
                 </div>
             </div>
 
-            <!-- Previous Agencies --><div class="border-t border-white/10 pt-8">
+            <div class="border-t border-white/10 pt-8">
                 <h4 class="text-xs text-gray-500 uppercase tracking-wider mb-4">Previous Work</h4>
                 <ul class="space-y-2 text-sm text-gray-300">
                     <li>Show + Tell Agency</li>
@@ -294,7 +276,7 @@
                 </ul>
             </div>
 
-            <!-- Preferred Stack --><div class="border-t border-white/10 pt-8">
+            <div class="border-t border-white/10 pt-8">
                 <h4 class="text-xs text-gray-500 uppercase tracking-wider mb-4">Preferred Stack</h4>
                 <div class="flex flex-wrap gap-2">
                     <span class="px-3 py-1 bg-white/5 rounded-full text-xs text-gray-300">React</span>
@@ -304,7 +286,7 @@
                 </div>
             </div>
 
-            <!-- Connect --><div class="border-t border-white/10 pt-8">
+            <div class="border-t border-white/10 pt-8">
                 <h4 class="text-xs text-gray-500 uppercase tracking-wider mb-4">Connect</h4>
                 <div class="flex flex-col space-y-2">
                     <a href="#" class="text-lg text-white hover:text-gray-400 transition-colors">LinkedIn ↗</a>
@@ -313,35 +295,28 @@
                 </div>
             </div>
 
-            <!-- Clients --><div class="border-t border-white/10 pt-8 pb-20">
+            <div class="border-t border-white/10 pt-8 pb-20">
                 <h4 class="text-xs text-gray-500 uppercase tracking-wider mb-4">Selected Clients</h4>
                 <p class="text-sm text-gray-400 leading-relaxed">
-                    PayPal
-                    Avion Tequila
-                    
+                    PayPal Avion Tequila
                 </p>
             </div>
         </div>
     </div>
 
-       <!-- Main Content Wrapper -->
     <main id="main-content" class="flex flex-col transition-transform duration-500">
-            <!-- Hero Section (Centered Vertically in available space, Flush Left) -->
-            <div class="flex-grow flex flex-col justify-center">
-                <section id="hero-section" class="max-w-4xl mr-auto mb-6 px-6 md:px-10">
-                    <div id="scroll-flash-text" 
-                         class="text-2xl md:text-4xl lg:text-5xl font-light leading-snug text-gray-300"
-                         data-original-text="Working where technology and impact come together-currently building in fintech and economic mobility.">
-                    </div>
-                    <p class="mt-8 text-xl md:text-3xl font-light text-gray-500 leading-relaxed">
-                        Outside of work, I'm usually either running(begrudgingly, of course), playing basketball or looking forward to my family's next road trip.
-                    </p>
-                </section>
-            </div>
-
-            <!-- Project Toggle (Sits at bottom of this container, just above photos) -->
-            
+        <div id="content-container" class="flex-grow flex flex-col justify-center opacity-0 transition-opacity duration-1000">
+            <section id="hero-section" class="max-w-4xl mr-auto mb-6 px-6 md:px-10">
+                <div id="scroll-flash-text" 
+                     class="text-2xl md:text-4xl lg:text-5xl font-light leading-snug text-gray-300"
+                     data-original-text="Working where technology and impact come together-currently building in fintech and economic mobility.">
+                </div>
+                <p class="mt-8 text-xl md:text-3xl font-light text-gray-500 leading-relaxed">
+                    Outside of work, I'm usually either running(begrudgingly, of course), playing basketball or looking forward to my family's next road trip.
+                </p>
+            </section>
         </div>
+
         <div>
             <section class="w-full mb-4 fade-in-up flex justify-center" style="">
                 <div class="flex items-center justify-center gap-2 text-xs uppercase tracking-widest border-b border-white/10 pb-4">
@@ -351,36 +326,54 @@
             </section>
         </div>
 
-        <!-- Marquee Section 1: Client Work (Default) -->
-             <section id="marquee-primary" 
-                 class="marquee-section w-full py-6 overflow-hidden fade-in-up 
-                        mx-[-10] md:mx-[-6]" 
+        <section id="marquee-primary" 
+                 class="marquee-section w-full py-6 overflow-hidden fade-in-up mx-[-10] md:mx-[-6]" 
                  style="animation-delay: 0.1s;">
             <div class="marquee-container">
                 <div class="marquee-content">
-                    
-                    <!-- Client Work Images (repeated for seamless loop) -->
                     <div data-project-id="mi-bcc" class="marquee-image-wrapper group">
                         <img src="images/work-1.jpg" class="marquee-image" alt="Michigan Black Chamber of Commerce">
                     </div>
-                    
                     <div data-project-id="uber" class="marquee-image-wrapper group">
                         <img src="images/work-2.jpg" class="marquee-image" alt="Uber Harlem Business Alliance">
                     </div>
-
                     <div data-project-id="thelillianproject" class="marquee-image-wrapper group">
                         <img src="images/work-3.jpg" class="marquee-image" alt="The Lillian Project">
                     </div>
-
                     <div data-project-id="BlackWomenDidThatAwards" class="marquee-image-wrapper group">
                         <img src="images/work-4.jpg" class="marquee-image" alt="HBA - BlackWomenDidThat Awards">
                     </div>
-
                     <div data-project-id="bronxchange" class="marquee-image-wrapper group">
                         <img src="images/work-5.jpg" class="marquee-image" alt="Bronxchange">
                     </div>
-                    
-                    <!-- Duplicates -->
+                    <div data-project-id="blackstudent10" class="marquee-image-wrapper group">
+                        <img src="images/work-6.jpg" class="marquee-image" alt="#BlackStudent10">
+                    </div>
+                    <div data-project-id="renaissance-house" class="marquee-image-wrapper group">
+                        <img src="images/work-7.jpg" class="marquee-image" alt="Renaissance House Martha's Vineyard">
+                    </div>
+                    <div data-project-id="disrupt-harlem" class="marquee-image-wrapper group">
+                        <img src="images/work-8.jpg" class="marquee-image" alt="Disrupt Harlem">
+                    </div>
+                    <div data-project-id="freespot" class="marquee-image-wrapper group">
+                        <img src="images/work-9.jpg" class="marquee-image" alt="FreeSpot">
+                    </div>
+
+                    <div data-project-id="mi-bcc" class="marquee-image-wrapper group">
+                        <img src="images/work-1.jpg" class="marquee-image" alt="Michigan Black Chamber of Commerce">
+                    </div>
+                    <div data-project-id="uber" class="marquee-image-wrapper group">
+                        <img src="images/work-2.jpg" class="marquee-image" alt="Uber Harlem Business Alliance">
+                    </div>
+                    <div data-project-id="thelillianproject" class="marquee-image-wrapper group">
+                        <img src="images/work-3.jpg" class="marquee-image" alt="The Lillian Project">
+                    </div>
+                    <div data-project-id="BlackWomenDidThatAwards" class="marquee-image-wrapper group">
+                        <img src="images/work-4.jpg" class="marquee-image" alt="HBA - BlackWomenDidThat Awards">
+                    </div>
+                    <div data-project-id="bronxchange" class="marquee-image-wrapper group">
+                        <img src="images/work-5.jpg" class="marquee-image" alt="Bronxchange">
+                    </div>
                     <div data-project-id="blackstudent10" class="marquee-image-wrapper group">
                         <img src="images/work-6.jpg" class="marquee-image" alt="#BlackStudent10">
                     </div>
@@ -397,10 +390,8 @@
             </div>
         </section>
 
-        <!-- Marquee Section 2: Personal Projects -->
         <section id="marquee-secondary" 
-                 class="marquee-section w-full py-6 overflow-hidden fade-in-up 
-                        mx-[-10] md:mx-[-6]" 
+                 class="marquee-section w-full py-6 overflow-hidden fade-in-up mx-[-10] md:mx-[-6]" 
                  style="animation-delay: 0.5s; display: none;">
             <div class="marquee-container">
                 <div class="marquee-content">
@@ -419,10 +410,10 @@
                     <div data-project-id="coder-sandbox" class="marquee-image-wrapper group">
                         <img src="images/play-5.jpg" class="marquee-image" alt="Personal 5">
                     </div>
-                    <div data-project-id="" class="marquee-image-wrapper group">
+                    <div data-project-id="personal-1" class="marquee-image-wrapper group">
                         <img src="images/play-6.jpg" class="marquee-image" alt="Personal 1">
                     </div>
-                    <div data-project-id="interior-design" class="marquee-image-wrapper group">
+                    <div data-project-id="interior" class="marquee-image-wrapper group">
                         <img src="images/play-7.jpg" class="marquee-image" alt="my-apt">
                     </div>
                     <div data-project-id="hoops" class="marquee-image-wrapper group">
@@ -446,17 +437,53 @@
                     <div data-project-id="startupbus" class="marquee-image-wrapper group">
                         <img src="images/play-14.jpg" class="marquee-image" alt="Personal 2">
                     </div>
-                    <!-- <div data-project-id="portfolio-v4" class="marquee-image-wrapper group">
-                        <img src="images/play-15.jpg" class="marquee-image" alt="Personal 2">
+
+                    <div data-project-id="nyc-marathon" class="marquee-image-wrapper group">
+                        <img src="images/play-1.jpg" class="marquee-image" alt="NYC Marathon">
+                    </div>
+                    <div data-project-id="nairobi" class="marquee-image-wrapper group">
+                        <img src="images/play-2.jpg" class="marquee-image" alt="Nairobi">
+                    </div>
+                    <div data-project-id="thanksgiving" class="marquee-image-wrapper group">
+                        <img src="images/play-3.jpg" class="marquee-image" alt="Thanksgiving">
+                    </div>
+                    <div data-project-id="sketch" class="marquee-image-wrapper group">
+                        <img src="images/play-4.jpg" class="marquee-image" alt="Buenos Aires - Sketch">
+                    </div>
+                    <div data-project-id="coder-sandbox" class="marquee-image-wrapper group">
+                        <img src="images/play-5.jpg" class="marquee-image" alt="Personal 5">
+                    </div>
+                    <div data-project-id="personal-1" class="marquee-image-wrapper group">
+                        <img src="images/play-6.jpg" class="marquee-image" alt="Personal 1">
+                    </div>
+                    <div data-project-id="interior" class="marquee-image-wrapper group">
+                        <img src="images/play-7.jpg" class="marquee-image" alt="my-apt">
+                    </div>
+                    <div data-project-id="hoops" class="marquee-image-wrapper group">
+                        <img src="images/play-8.jpg" class="marquee-image" alt="Basketball in Buenos Aires">
+                    </div>
+                    <div data-project-id="halcyon" class="marquee-image-wrapper group">
+                        <img src="images/play-9.jpg" class="marquee-image" alt="Halcyon - DC">
+                    </div>
+                    <div data-project-id="sailing" class="marquee-image-wrapper group">
+                        <img src="images/play-10.jpg" class="marquee-image" alt="Governor's Cup">
                     </div>
                     <div data-project-id="portfolio-v4" class="marquee-image-wrapper group">
-                        <img src="images/play-16.jpg" class="marquee-image" alt="Personal 2"> -->
+                        <img src="images/play-11.jpg" class="marquee-image" alt="Personal 2">
+                    </div>
+                    <div data-project-id="netflix" class="marquee-image-wrapper group">
+                        <img src="images/play-12.jpg" class="marquee-image" alt="Maine Lobsters">
+                    </div>
+                    <div data-project-id="jim" class="marquee-image-wrapper group">
+                        <img src="images/play-13.jpg" class="marquee-image" alt="Personal 2">
+                    </div>
+                    <div data-project-id="ibm" class="marquee-image-wrapper group">
+                        <img src="images/play-14.jpg" class="marquee-image" alt="IBM Hackathon">
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Footer -->
         <div id="footer-container" class="px-6 md:px-10 text-center">
             <div class="text-xs text-gray-600 pt-4 pb-4">
                 &copy; 2026 JustDaryl LLC. All Rights Reserved.
@@ -464,7 +491,7 @@
         </div>
     </main>
     
-    <!-- Project Details Modal --><div id="project-modal" class="fixed inset-0 z-[100] flex items-center justify-center p-4 modal-overlay hidden-modal" onclick="closeModal(event)">
+    <div id="project-modal" class="fixed inset-0 z-[100] flex items-center justify-center p-4 modal-overlay hidden-modal" onclick="closeModal(event)">
         <div class="modal-content w-full max-w-3xl bg-[#1a1a1a] rounded-xl shadow-2xl p-6 md:p-8 transform scale-95 opacity-0 transition-all duration-300 ease-out" onclick="event.stopPropagation()">
             
             <div class="flex justify-between items-start border-b border-white/10 pb-4 mb-4">
@@ -506,7 +533,6 @@
         </div>
     </div>
 
-    <!-- Contact Dialog (New Element for the Contact link) -->
     <dialog id="contact-dialog">
         <div class="p-6 md:p-8">
             <h2 class="text-2xl font-semibold text-white border-b border-white/10 pb-3 mb-4">Let's Talk</h2>
@@ -541,14 +567,13 @@
         </div>
     </dialog>
 
-
-    <!-- Design Element: Fixed Bottom Line --><div class="fixed bottom-0 left-0 w-full h-2 z-[101]" style="background-color: #6b2737;"></div>
+    <div class="fixed bottom-0 left-0 w-full h-2 z-[101]" style="background-color: #6b2737;"></div>
 
     <script>
         // --- Icons ---
         lucide.createIcons();
 
-        // --- Project Data (Truncated for brevity, full data retained) ---
+        // --- Project Data ---
         const projectsData = {
             'mi-bcc': {
                 title: 'Michigan Black Chamber of Commerce',
@@ -606,7 +631,7 @@
                 imageUrl: 'images/work-7.jpg', 
                 link: '#'
             },
-            'disruptharlem': {
+            'disrupt-harlem': { 
                 title: 'DisruptHarlem',
                 role: 'Flyer Design',
                 tech: ['Photoshop', 'Photocopier',],
@@ -622,8 +647,10 @@
                 imageUrl: 'images/work-9.jpg', 
                 link: '#'
             },
-             'nyc-marathon': {
+            'nyc-marathon': {
                 title: '2024 NYC Marathon',
+                role: 'Runner',
+                tech: ['Running'],
                 description: 'This marathon was my ticket out of the running cult. I was really disappointed with my time in my first race so I came back with a vengence. Not really. Was still slow but fast enough to know it would be my last one...for now.',
                 imageUrl: 'images/play-1.jpg', 
                 link: '#'
@@ -631,61 +658,108 @@
             'nairobi': {
                 title: '2025 Global Good Fund Annual Summit',
                 role: '2024 Fellow and Speaker',
+                tech: ['Public Speaking'],
                 description: 'I was selected as a 2024 Global Good Fund Fellow and was invited back to the Annual Summit in 2025. Shared about my experiences as a fellow and managing your mental health as a founder.',
                 imageUrl: 'images/play-2.jpg', 
                 link: '#'
             },
             'thanksgiving': {
                 title: 'Thanksgiving 2024',
+                role: 'Family',
+                tech: ['Travel'],
                 description: 'Its pretty cool my family shares a love for travel. In 2024 we forewent the annual trip back home for the holidays in exchange for a trip to cancun. The drinks were watered down but the love was like concentrate.',
                 imageUrl: 'images/play-3.jpg', 
                 link: '#'
             },
             'sketch': {
                 title: 'Argentina 2025',
+                role: 'Traveler',
+                tech: ['Sketching'],
                 description: 'I received a grant to spend 3 months abroad at the beginning of 2025. I chose to go Buenos Aires, Argentina. Discovered the best medialunas on planet earth, and ate my body weight in steak.',
                 imageUrl: 'images/play-4.jpg', 
                 link: '#'
             },
-            'interior': {
-                title: 'Ar',
-                description: 'If you really want to know what I do when .',
+            'coder-sandbox': {
+                title: 'Coder Sandbox',
+                role: 'Creative Coder',
+                tech: ['HTML/CSS', 'JS'],
+                description: 'A playground for testing new interaction models and code snippets.',
                 imageUrl: 'images/play-5.jpg', 
                 link: '#'
             },
-              'hoops': {
+            'personal-1': {
+                title: 'Personal Photography',
+                role: 'Photographer',
+                tech: ['Camera', 'Lightroom'],
+                description: 'Explorations in light and composition.',
+                imageUrl: 'images/play-6.jpg', 
+                link: '#'
+            },
+            'halcyon': { 
+                title: 'Halcyon Fellowship',
+                role: 'Fellow',
+                tech: ['Architecture', 'Decor'],
+                description: 'The Halcyon Fellowship took me to Washington DC for 2mos. On top of living in a historic mansion in the heart of the Georgetown, I trained for the 2024 NYC Marathon there and now have the National Mall forever etched in my brain forever.',
+                imageUrl: 'images/play-7.jpg', 
+                link: '#'
+            },
+            'hoops': {
                 title: 'The Language of Sport',
+                role: 'Athlete',
+                tech: ['Basketball'],
                 description: 'One of the things that make travel so special is the humans you get to connect with. While I still speak pretty awful Spanish, it has been really amazing to connect with people from other parts of the world who just share a love for competing.',
-                imageUrl: 'images/play-6.jpg', 
+                imageUrl: 'images/play-8.jpg', 
                 link: '#'
             },
-              'halcyon': {
-                title: 'The Language of Sport',
-                description: 'One of the things that make travel so special is the humans you get to connect with ',
-                imageUrl: 'images/play-6.jpg', 
+            'maine': {
+                title: 'Maine Lobsters',
+                role: 'Skipper',
+                tech: ['Social Impact'],
+                description: 'Another sailing adventure with Jim. If you weren\'t aware; lobsters scream when you boil them. I know they say that it\'s the air going through their shells but why do they clinch up when they die?',
+                imageUrl: 'images/play-9.jpg', 
                 link: '#'
             },
-              'sailing': {
-                title: 'The Language of Sport',
-                description: 'One of the things that make travel so special is the humans you get to connect with ',
-                imageUrl: 'images/play-6.jpg', 
+            'sailing': {
+                title: 'Governor\'s Cup',
+                role: 'Sailor',
+                tech: ['Sailing'],
+                description: 'Sailing competition and maritime adventures.',
+                imageUrl: 'images/play-10.jpg', 
                 link: '#'
             },
-              'maine': {
-                title: 'The Language of Sport',
-                description: 'One of the things that make travel so special is the humans you get to connect with ',
-                imageUrl: 'images/play-6.jpg', 
+            'portfolio-v4': {
+                title: 'Portfolio V4',
+                role: 'Developer',
+                tech: ['Previous Stack'],
+                description: 'A look back at the previous iteration of my personal portfolio site.',
+                imageUrl: 'images/play-11.jpg', 
                 link: '#'
             },
-              'jim': {
+            'netflix': {
+                title: 'Netflix Hackathon',
+                role: 'Traveler',
+                tech: ['Travel'],
+                description: 'Was selected as 1 of 50 activists from around the country doing work in undocumented immigratation to partipate in a hackahthon. Got to play basketball at midnight with a mentor of mine. In hindsight, I should have dunked on him.',
+                imageUrl: 'images/play-12.jpg', 
+                link: '#'
+            },
+            'jim': {
                 title: 'All Aboard Chime',
-                description: 'One of the things that make travel so special is the humans you get to connect with ',
-                imageUrl: 'images/play-6.jpg', 
+                role: 'Personal',
+                tech: ['Misc'],
+                description: 'Personal project exploration.',
+                imageUrl: 'images/play-13.jpg', 
+                link: '#'
+            },
+            'ibm': {
+                title: 'IBM Hackathon',
+                role: 'Hacker',
+                tech: ['Hackathon'],
+                description: 'First time winning a hackthon! Fun fact, I was so broke at the time; We got a free trip to SF but I literally had $0 in my account. My friend, and former landlady luckily leant me enough money for the hotel deductible and some decent chinese.',
+                imageUrl: 'images/play-14.jpg', 
                 link: '#'
             },
         };
-
-        
 
         // --- DOM Elements ---
         const credentialsBtn = document.getElementById('credentials-btn');
@@ -694,6 +768,8 @@
         const credentialsIcon = document.getElementById('credentials-icon');
         const panelContent = credentialsPanel.querySelector('.fade-content');
         const mainContent = document.getElementById('main-content');
+        
+        // Ensure contentContainer exists to prevent errors
         const contentContainer = document.getElementById('content-container');
 
         const marqueePrimary = document.getElementById('marquee-primary');
@@ -721,10 +797,12 @@
         let typewriterExecuted = false;
 
         // --- Functions ---
-
         function openModal(projectId) {
             const project = projectsData[projectId];
-            if (!project) return;
+            if (!project) {
+                console.error('Project data missing for ID:', projectId);
+                return;
+            }
 
             modalTitle.textContent = project.title;
             modalRole.textContent = `Role: ${project.role}`;
@@ -732,9 +810,14 @@
             modalImage.src = project.imageUrl;
             modalLiveLink.href = project.link;
 
-            modalTechStack.innerHTML = project.tech.map(tech => 
-                `<span class="px-3 py-1 bg-white/5 rounded-full text-xs text-gray-300">${tech}</span>`
-            ).join('');
+            // Handle tech stack safely
+            if (project.tech && Array.isArray(project.tech)) {
+                 modalTechStack.innerHTML = project.tech.map(tech => 
+                    `<span class="px-3 py-1 bg-white/5 rounded-full text-xs text-gray-300">${tech}</span>`
+                ).join('');
+            } else {
+                modalTechStack.innerHTML = '';
+            }
 
             projectModal.classList.remove('hidden-modal');
             modalContent.offsetWidth; 
@@ -755,9 +838,8 @@
             }, 300); 
         }
 
-        // NEW: Contact Dialog Functions
         function openContactDialog(e) {
-            e.preventDefault(); // Stop the default link action
+            e.preventDefault(); 
             contactDialog.showModal();
         }
 
@@ -808,7 +890,9 @@
                     i++;
                     setTimeout(typing, delay);
                 } else {
-                    contentContainer.classList.remove('opacity-0');
+                    if (contentContainer) {
+                        contentContainer.classList.remove('opacity-0');
+                    }
                 }
             }
             typing();
@@ -834,7 +918,6 @@
         togglePrimary.addEventListener('click', () => toggleMarquee('primary'));
         toggleSecondary.addEventListener('click', () => toggleMarquee('secondary'));
         
-        // NEW: Attach listener to the Contact link
         contactLink.addEventListener('click', openContactDialog);
 
         document.addEventListener('click', function(e) {
@@ -856,7 +939,6 @@
             }
         });
 
-        // Scroll/Touch trigger for typewriter
         window.addEventListener('wheel', startTypewriterOnScroll, { passive: true });
         window.addEventListener('touchstart', startTypewriterOnScroll, { passive: true });
         window.addEventListener('click', startTypewriterOnScroll, { once: true });
@@ -892,9 +974,11 @@
             });
         }
         
-        // Initialize with cleared text for effect
+        // Initialize 
         scrollFlashText.textContent = '';
-        contentContainer.classList.add('opacity-0');
+        if (contentContainer) {
+            contentContainer.classList.add('opacity-0');
+        }
 
     </script>
 </body>
