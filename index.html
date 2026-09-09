@@ -1,10 +1,15 @@
-<<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JustDaryl</title>
-    <link rel="icon" href="images/justdarylfavicon1.png" type="image/png"/>
+    
+    <!-- Robust Favicon Implementation -->
+    <link rel="icon" type="image/png" href="images/justdarylfavicon1.png">
+    <link rel="shortcut icon" type="image/png" href="images/justdarylfavicon1.png">
+    <link rel="apple-touch-icon" href="images/justdarylfavicon1.png">
+    
     <meta name="description" content="Portfolio of Daryl Holman Jr. - Designer and Developer">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -26,11 +31,11 @@
             color: var(--text-color);
             font-family: 'Manrope', sans-serif;
             cursor: none; 
-            overflow-x: hidden; /* Prevent horizontal scroll bugs on mobile */
+            overflow-x: hidden; 
         }
         @media (min-width: 768px) {
             body {
-                overflow: hidden; /* Lock body scrolling only on desktop */
+                overflow: hidden; 
                 height: 100vh;
             }
         }
@@ -53,13 +58,13 @@
             left: 0;
             right: 0;
             bottom: 2px; 
-            overflow-y: auto; /* ALLOW scrolling on mobile */
+            overflow-y: auto; 
             overflow-x: hidden;
         }
         @media (min-width: 768px) {
             #main-content {
                 top: 180px; 
-                overflow-y: hidden; /* KEEP locked on desktop */
+                overflow-y: hidden; 
             }
         }
         
@@ -100,8 +105,8 @@
 
         /* Square Images */
         .marquee-image-wrapper {
-            width: 130px; /* Scaled down for mobile */
-            height: 130px; /* Scaled down for mobile */
+            width: 130px; 
+            height: 130px; 
             margin-right: 8px;
             position: relative;
             border-radius: 4px;
@@ -111,8 +116,8 @@
         }
         @media (min-width: 768px) {
             .marquee-image-wrapper {
-                width: 190px; /* Original size for desktop */
-                height: 190px; /* Original size for desktop */
+                width: 190px; 
+                height: 190px; 
                 margin-right: 12px;
             }
         }
@@ -266,28 +271,28 @@
             <div class="grid grid-cols-2 gap-y-8 gap-x-4 border-t border-white/10 pt-8">
                 <div>
                     <p class="text-xs text-gray-500 uppercase tracking-wider mb-1">Experience</p>
-                    <p class="text-white">Freelance since 2017</p>
+                    <p class="text-white">Freelance since 2021</p>
                 </div>
                 <div>
-                    <p class="text-xs text-gray-500 uppercase tracking-wider mb-1">Previous Work</p>
-                    <p class="text-white">Designer</p>
+                    <p class="text-xs text-gray-500 uppercase tracking-wider mb-1">Revenue</p>
+                    <p class="text-white">£1M+ Generated</p>
                 </div>
                 <div>
-                    <p class="text-xs text-gray-500 uppercase tracking-wider mb-1">Expertise</p>
-                    <p class="text-white">Debt Markets</p>
+                    <p class="text-xs text-gray-500 uppercase tracking-wider mb-1">Avg Project</p>
+                    <p class="text-white">~£12.5k</p>
                 </div>
                 <div>
-                    <p class="text-xs text-gray-500 uppercase tracking-wider mb-1">Panels</p>
-                    <p class="text-white">Yale Black Venture Summit</p>
+                    <p class="text-xs text-gray-500 uppercase tracking-wider mb-1">Recognition</p>
+                    <p class="text-white">13x Site of the Day</p>
                 </div>
             </div>
 
             <div class="border-t border-white/10 pt-8">
                 <h4 class="text-xs text-gray-500 uppercase tracking-wider mb-4">Previous Work</h4>
                 <ul class="space-y-2 text-sm text-gray-300">
-                    <li>US Senate Panelist</li>
-                    <li>Founder in Residence at Antler+gener8tor</li>
-                    <li>Freelance Designer</li>
+                    <li>Show + Tell Agency</li>
+                    <li>Creode Agency</li>
+                    <li>In-House Brands</li>
                 </ul>
             </div>
 
@@ -341,7 +346,6 @@
             </section>
         </div>
 
-        <!-- Removed the invalid mx-[-10] classes that broke mobile viewports -->
         <section id="marquee-primary" 
                  class="marquee-section w-full py-4 md:py-6 overflow-hidden fade-in-up" 
                  style="animation-delay: 0.1s;">
@@ -406,13 +410,33 @@
             </div>
         </section>
 
-        <!-- Removed the invalid mx-[-10] classes that broke mobile viewports -->
         <section id="marquee-secondary" 
                  class="marquee-section w-full py-4 md:py-6 overflow-hidden fade-in-up" 
                  style="animation-delay: 0.5s; display: none;">
             <div class="marquee-container">
                 <div class="marquee-content">
                     <!-- LIST 1 -->
+                    <div data-project-id="sailing" class="marquee-image-wrapper group">
+                        <img src="images/play-10.jpg" class="marquee-image" alt="Governor's Cup">
+                    </div>
+                    <div data-project-id="maine" class="marquee-image-wrapper group">
+                        <img src="images/play-12.jpg" class="marquee-image" alt="Maine Lobsters">
+                    </div>
+                    <div data-project-id="jim" class="marquee-image-wrapper group">
+                        <img src="images/play-13.jpg" class="marquee-image" alt="Sailing with Jim">
+                    </div>
+                    <div data-project-id="startupbus" class="marquee-image-wrapper group">
+                        <img src="images/play-11.jpg" class="marquee-image" alt="Startup Bus">
+                    </div>
+                    <div data-project-id="netflix" class="marquee-image-wrapper group">
+                        <img src="images/play-14.jpg" class="marquee-image" alt="Netflix Hackathon">
+                    </div>
+                    <div data-project-id="coder-sandbox" class="marquee-image-wrapper group">
+                        <img src="images/play-5.jpg" class="marquee-image" alt="Coder Sandbox">
+                    </div>
+                    <div data-project-id="personal-1" class="marquee-image-wrapper group">
+                        <img src="images/play-6.jpg" class="marquee-image" alt="Personal Photography">
+                    </div>
                     <div data-project-id="nyc-marathon" class="marquee-image-wrapper group">
                         <img src="images/play-1.jpg" class="marquee-image" alt="NYC Marathon">
                     </div>
@@ -423,13 +447,7 @@
                         <img src="images/play-3.jpg" class="marquee-image" alt="Thanksgiving">
                     </div>
                     <div data-project-id="sketch" class="marquee-image-wrapper group">
-                        <img src="images/play-4.jpg" class="marquee-image" alt="Buenos Aires - Sketch">
-                    </div>
-                    <div data-project-id="coder-sandbox" class="marquee-image-wrapper group">
-                        <img src="images/play-5.jpg" class="marquee-image" alt="Coder Sandbox">
-                    </div>
-                    <div data-project-id="personal-1" class="marquee-image-wrapper group">
-                        <img src="images/play-6.jpg" class="marquee-image" alt="Personal 1">
+                        <img src="images/play-4.jpg" class="marquee-image" alt="Argentina Sketch">
                     </div>
                     <div data-project-id="interior" class="marquee-image-wrapper group">
                         <img src="images/play-7.jpg" class="marquee-image" alt="Apartment Interior">
@@ -438,25 +456,31 @@
                         <img src="images/play-8.jpg" class="marquee-image" alt="Basketball in Buenos Aires">
                     </div>
                     <div data-project-id="halcyon" class="marquee-image-wrapper group">
-                        <img src="images/play-9.jpg" class="marquee-image" alt="Halcyon - DC">
-                    </div>
-                    <div data-project-id="sailing" class="marquee-image-wrapper group">
-                        <img src="images/play-10.jpg" class="marquee-image" alt="Governor's Cup">
-                    </div>
-                    <div data-project-id="portfolio-v4" class="marquee-image-wrapper group">
-                        <img src="images/play-11.jpg" class="marquee-image" alt="Portfolio V4">
-                    </div>
-                    <div data-project-id="maine" class="marquee-image-wrapper group">
-                        <img src="images/play-12.jpg" class="marquee-image" alt="Maine Lobsters">
-                    </div>
-                    <div data-project-id="jim" class="marquee-image-wrapper group">
-                        <img src="images/play-13.jpg" class="marquee-image" alt="Personal 2">
-                    </div>
-                    <div data-project-id="ibm" class="marquee-image-wrapper group">
-                        <img src="images/play-14.jpg" class="marquee-image" alt="IBM Hackathon">
+                        <img src="images/play-9.jpg" class="marquee-image" alt="Halcyon DC">
                     </div>
         
                     <!-- LIST 2 (Exact Duplicate for Infinite Scroll) -->
+                    <div data-project-id="sailing" class="marquee-image-wrapper group">
+                        <img src="images/play-10.jpg" class="marquee-image" alt="Governor's Cup">
+                    </div>
+                    <div data-project-id="maine" class="marquee-image-wrapper group">
+                        <img src="images/play-12.jpg" class="marquee-image" alt="Maine Lobsters">
+                    </div>
+                    <div data-project-id="jim" class="marquee-image-wrapper group">
+                        <img src="images/play-13.jpg" class="marquee-image" alt="Sailing with Jim">
+                    </div>
+                    <div data-project-id="startupbus" class="marquee-image-wrapper group">
+                        <img src="images/play-11.jpg" class="marquee-image" alt="Startup Bus">
+                    </div>
+                    <div data-project-id="netflix" class="marquee-image-wrapper group">
+                        <img src="images/play-14.jpg" class="marquee-image" alt="Netflix Hackathon">
+                    </div>
+                    <div data-project-id="coder-sandbox" class="marquee-image-wrapper group">
+                        <img src="images/play-5.jpg" class="marquee-image" alt="Coder Sandbox">
+                    </div>
+                    <div data-project-id="personal-1" class="marquee-image-wrapper group">
+                        <img src="images/play-6.jpg" class="marquee-image" alt="Personal Photography">
+                    </div>
                     <div data-project-id="nyc-marathon" class="marquee-image-wrapper group">
                         <img src="images/play-1.jpg" class="marquee-image" alt="NYC Marathon">
                     </div>
@@ -467,13 +491,7 @@
                         <img src="images/play-3.jpg" class="marquee-image" alt="Thanksgiving">
                     </div>
                     <div data-project-id="sketch" class="marquee-image-wrapper group">
-                        <img src="images/play-4.jpg" class="marquee-image" alt="Buenos Aires - Sketch">
-                    </div>
-                    <div data-project-id="coder-sandbox" class="marquee-image-wrapper group">
-                        <img src="images/play-5.jpg" class="marquee-image" alt="Coder Sandbox">
-                    </div>
-                    <div data-project-id="personal-1" class="marquee-image-wrapper group">
-                        <img src="images/play-6.jpg" class="marquee-image" alt="Personal 1">
+                        <img src="images/play-4.jpg" class="marquee-image" alt="Argentina Sketch">
                     </div>
                     <div data-project-id="interior" class="marquee-image-wrapper group">
                         <img src="images/play-7.jpg" class="marquee-image" alt="Apartment Interior">
@@ -482,22 +500,7 @@
                         <img src="images/play-8.jpg" class="marquee-image" alt="Basketball in Buenos Aires">
                     </div>
                     <div data-project-id="halcyon" class="marquee-image-wrapper group">
-                        <img src="images/play-9.jpg" class="marquee-image" alt="Halcyon - DC">
-                    </div>
-                    <div data-project-id="sailing" class="marquee-image-wrapper group">
-                        <img src="images/play-10.jpg" class="marquee-image" alt="Governor's Cup">
-                    </div>
-                    <div data-project-id="portfolio-v4" class="marquee-image-wrapper group">
-                        <img src="images/play-11.jpg" class="marquee-image" alt="Portfolio V4">
-                    </div>
-                    <div data-project-id="maine" class="marquee-image-wrapper group">
-                        <img src="images/play-12.jpg" class="marquee-image" alt="Maine Lobsters">
-                    </div>
-                    <div data-project-id="jim" class="marquee-image-wrapper group">
-                        <img src="images/play-13.jpg" class="marquee-image" alt="Personal 2">
-                    </div>
-                    <div data-project-id="ibm" class="marquee-image-wrapper group">
-                        <img src="images/play-14.jpg" class="marquee-image" alt="IBM Hackathon">
+                        <img src="images/play-9.jpg" class="marquee-image" alt="Halcyon DC">
                     </div>
                 </div>
             </div>
@@ -666,11 +669,19 @@
                 imageUrl: 'images/work-9.jpg', 
                 link: '#'
             },
+            'personal-1': {
+                title: 'Personal Photography',
+                role: 'Photographer',
+                tech: ['Camera', 'Lightroom'],
+                description: 'Explorations in light and composition.',
+                imageUrl: 'images/play-6.jpg', 
+                link: '#'
+            },
             'nyc-marathon': {
                 title: '2024 NYC Marathon',
                 role: 'Runner',
                 tech: ['Running'],
-                description: 'This marathon was my ticket out of the running cult. I was really disappointed with my time in my first race so I came back with a vengence. Not really. Was still slow but fast enough to know it would be my last one...for now.',
+                description: 'This marathon was my ticket out of the running cult. I was really disappointed with my time in my first race so I came back with a vengeance. Not really. Was still slow but fast enough to know it would be my last one...for now.',
                 imageUrl: 'images/play-1.jpg', 
                 link: '#'
             },
@@ -686,7 +697,7 @@
                 title: 'Thanksgiving 2024',
                 role: 'Family',
                 tech: ['Travel'],
-                description: 'Its pretty cool my family shares a love for travel. In 2024 we forewent the annual trip back home for the holidays in exchange for a trip to cancun. The drinks were watered down but the love was like concentrate.',
+                description: 'Its pretty cool my family shares a love for travel. In 2024 we forewent the annual trip back home for the holidays in exchange for a trip to Cancun. The drinks were watered down but the love was like concentrate.',
                 imageUrl: 'images/play-3.jpg', 
                 link: '#'
             },
@@ -695,22 +706,6 @@
                 tech: ['Travel'],
                 description: 'I received a grant to spend 3 months abroad at the beginning of 2025. I chose to go Buenos Aires, Argentina. Discovered the best medialunas on planet earth, and ate my body weight in steak.',
                 imageUrl: 'images/play-4.jpg', 
-                link: '#'
-            },
-            'coder-sandbox': {
-                title: 'Coder Sandbox',
-                role: 'Creative Coder',
-                tech: ['HTML/CSS', 'JS'],
-                description: 'A playground for testing new interaction models and code snippets.',
-                imageUrl: 'images/play-5.jpg', 
-                link: '#'
-            },
-            'personal-1': {
-                title: 'Personal Photography',
-                role: 'Photographer',
-                tech: ['Camera', 'Lightroom'],
-                description: 'Explorations in light and composition.',
-                imageUrl: 'images/play-6.jpg', 
                 link: '#'
             },
             'interior': {
@@ -732,7 +727,7 @@
             'halcyon': { 
                 title: 'Halcyon Fellowship',
                 role: 'Fellow',
-                description: 'The Halcyon Fellowship took me to Washington DC for 2mos. On top of living in a historic mansion in the heart of the Georgetown, I trained for the 2024 NYC Marathon there and now have the National Mall forever etched in my brain forever.',
+                description: 'The Halcyon Fellowship took me to Washington DC for 2mos. On top of living in a historic mansion in the heart of the Georgetown, I trained for the 2024 NYC Marathon there and now have the National Mall forever etched in my brain.',
                 imageUrl: 'images/play-9.jpg', 
                 link: '#'
             },
@@ -742,14 +737,6 @@
                 tech: ['Sailing'],
                 description: 'Sailing competition and maritime adventures.',
                 imageUrl: 'images/play-10.jpg', 
-                link: '#'
-            },
-            'portfolio-v4': {
-                title: 'Portfolio V4',
-                role: 'Developer',
-                tech: ['Previous Stack'],
-                description: 'A look back at the previous iteration of my personal portfolio site.',
-                imageUrl: 'images/play-11.jpg', 
                 link: '#'
             },
             'maine': {
@@ -768,12 +755,36 @@
                 imageUrl: 'images/play-13.jpg', 
                 link: '#'
             },
+            'startupbus': {
+                title: 'Startup Bus',
+                role: 'Hacker',
+                tech: ['Hackathon'],
+                description: 'Hackathon on a bus.',
+                imageUrl: 'images/play-11.jpg', 
+                link: '#'
+            },
+            'netflix': {
+                title: 'Netflix Hackathon',
+                role: 'Hacker',
+                tech: ['Hackathon', 'Travel'],
+                description: 'Was selected as 1 of 50 activists from around the country doing work in undocumented immigration to participate in a hackathon. Got to play basketball at midnight with a mentor of mine. In hindsight, I should have dunked on him.',
+                imageUrl: 'images/play-14.jpg', 
+                link: '#'
+            },
+            'coder-sandbox': {
+                title: 'Coder Sandbox',
+                role: 'Creative Coder',
+                tech: ['HTML/CSS', 'JS'],
+                description: 'A playground for testing new interaction models and code snippets.',
+                imageUrl: 'images/play-5.jpg', 
+                link: '#'
+            },
             'ibm': {
                 title: 'IBM Hackathon',
                 role: 'Hacker',
                 tech: ['Hackathon'],
-                description: 'First time winning a hackthon! Fun fact, I was so broke at the time; We got a free trip to SF but I literally had $0 in my account. My friend, and former landlady luckily leant me enough money for the hotel deductible and some decent chinese.',
-                imageUrl: 'images/play-14.jpg', 
+                description: 'First time winning a hackathon! Fun fact, I was so broke at the time; We got a free trip to SF but I literally had $0 in my account. My friend, and former landlady luckily leant me enough money for the hotel deductible and some decent chinese.',
+                imageUrl: 'images/play-15.jpg', 
                 link: '#'
             }
         };
