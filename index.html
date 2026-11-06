@@ -16,7 +16,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <meta property="og:image" content="images/whatsinaname.png">
     <meta property="og:image:type" content="image/png">
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,400&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
     <script src="https://cdn.lgrckt-in.com/LogRocket.min.js" crossorigin="anonymous"></script>
     <script>window.LogRocket && window.LogRocket.init('ph1hrq/portfolio');</script>
@@ -183,6 +183,47 @@
             width: 400px;
             background-color: #1a1a1a; 
             color: var(--text-color);
+        }
+
+        /* Editorial Essay Typography & Scrollbars */
+        .essay-serif {
+            font-family: 'Newsreader', Georgia, serif;
+        }
+        .essay-body p {
+            margin-bottom: 1.5rem;
+            line-height: 1.85;
+            color: #d4d4d4;
+            font-size: 1.0625rem;
+        }
+        .essay-body h3 {
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 1.25rem;
+            margin-top: 2.25rem;
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.01em;
+        }
+        .essay-body blockquote {
+            border-left: 2px solid #6b2737;
+            padding-left: 1.25rem;
+            margin: 2rem 0;
+            font-family: 'Newsreader', Georgia, serif;
+            font-style: italic;
+            font-size: 1.25rem;
+            color: #f5f5f5;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 5px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.3);
         }
     </style>
 </head>
@@ -458,6 +499,9 @@
                     <div data-project-id="halcyon" class="marquee-image-wrapper group">
                         <img src="images/play-9.jpg" class="marquee-image" alt="Halcyon DC">
                     </div>
+                    <div data-project-id="ceviche" class="marquee-image-wrapper group">
+                        <img src="images/play-15.jpg" class="marquee-image" alt="Peru 2025">
+                    </div>
         
                     <!-- LIST 2 (Exact Duplicate for Infinite Scroll) -->
                     <div data-project-id="sailing" class="marquee-image-wrapper group">
@@ -502,6 +546,9 @@
                     <div data-project-id="halcyon" class="marquee-image-wrapper group">
                         <img src="images/play-9.jpg" class="marquee-image" alt="Halcyon DC">
                     </div>
+                    <div data-project-id="ceviche" class="marquee-image-wrapper group">
+                        <img src="images/play-15.jpg" class="marquee-image" alt="Peru 2025">
+                    </div>
                 </div>
             </div>
         </section>
@@ -513,6 +560,7 @@
         </div>
     </main>
     
+    <!-- PROJECT MODAL -->
     <div id="project-modal" class="fixed inset-0 z-[100] flex items-center justify-center p-4 modal-overlay hidden-modal" onclick="closeModal(event)">
         <div class="modal-content w-full max-w-3xl bg-[#1a1a1a] rounded-xl shadow-2xl p-6 md:p-8 transform scale-95 opacity-0 transition-all duration-300 ease-out" onclick="event.stopPropagation()">
             
@@ -547,11 +595,59 @@
                     <div id="modal-tech-stack" class="flex flex-wrap gap-2"></div>
                 </div>
 
-                <a id="modal-live-link" href="#" target="_blank" class="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-white hover:text-green-400 transition-colors border-t border-white/10 pt-4 mt-4">
-                    View Live Project
-                    <i data-lucide="external-link" class="w-4 h-4"></i>
-                </a>
+                <div class="flex flex-wrap items-center gap-6 border-t border-white/10 pt-4 mt-4">
+                    <a id="modal-live-link" href="#" target="_blank" class="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-white hover:text-green-400 transition-colors">
+                        View Live Project
+                        <i data-lucide="external-link" class="w-4 h-4"></i>
+                    </a>
+
+                    <button id="modal-essay-btn" type="button" class="hidden items-center gap-2 text-sm font-semibold uppercase tracking-wider text-white hover:text-green-400 transition-colors">
+                        <span id="modal-essay-btn-text">Read Essay</span>
+                        <i data-lucide="book-open" class="w-4 h-4"></i>
+                    </button>
+                </div>
             </div>
+        </div>
+    </div>
+
+    <!-- ESSAY READER MODAL (Stays hidden until a project with an `essay` object is clicked) -->
+    <div id="essay-modal" class="fixed inset-0 z-[110] flex items-center justify-center p-4 md:p-6 modal-overlay hidden-modal" onclick="closeEssayModal(event)">
+        <div class="essay-modal-content modal-content w-full max-w-2xl bg-[#121212] border border-white/10 rounded-xl shadow-2xl flex flex-col max-h-[85vh] transform scale-95 opacity-0" onclick="event.stopPropagation()">
+            
+            <!-- Sticky Top Reader Bar -->
+            <div class="flex justify-between items-center px-6 py-4 border-b border-white/10 bg-[#121212]/90 backdrop-blur sticky top-0 z-10 rounded-t-xl">
+                <div class="flex items-center gap-3 text-xs uppercase tracking-widest text-gray-400">
+                    <span id="essay-modal-category" class="px-2.5 py-0.5 bg-white/5 text-gray-300 rounded">Essay</span>
+                    <span>&bull;</span>
+                    <span id="essay-modal-date">Date</span>
+                    <span>&bull;</span>
+                    <span id="essay-modal-readtime">Read Time</span>
+                </div>
+                <button id="essay-close-btn" class="p-1.5 text-white/70 hover:text-white transition-colors rounded-lg hover:bg-white/5" onclick="closeEssayModal()">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+
+            <!-- Scrollable Article Body -->
+            <article id="essay-scroll-container" class="p-6 md:p-12 overflow-y-auto custom-scrollbar">
+                <h1 id="essay-modal-title" class="essay-serif text-3xl md:text-4xl font-normal text-white leading-tight mb-3">
+                    Essay Title
+                </h1>
+                <p id="essay-modal-subtitle" class="text-base md:text-lg text-gray-400 font-light mb-8 pb-8 border-b border-white/10">
+                    Essay subtitle goes here.
+                </p>
+                
+                <div id="essay-modal-body" class="essay-body">
+                    <!-- HTML Content Injected Here -->
+                </div>
+
+                <div class="mt-12 pt-8 border-t border-white/10 flex justify-between items-center text-xs text-gray-500">
+                    <span>Written by Daryl Holman Jr.</span>
+                    <button onclick="returnToProjectModal()" class="text-white hover:text-gray-300 uppercase tracking-widest transition-colors">
+                        ← Back to Project
+                    </button>
+                </div>
+            </article>
         </div>
     </div>
 
@@ -603,7 +699,24 @@
                 tech: ['Adobe Photoshop'],
                 description: 'This was literally some of my earliest work as a designer. I came onto the team as an MPA Intern with an expressed interest in making use of the design skills I had been learning on YouTube over the summer.',
                 imageUrl: 'images/work-1.jpg', 
-                link: '#'
+                link: '#',
+                // SAMPLE ESSAY: Copy this `essay` object into any other project below to add a blog post to it
+                essay: {
+                    buttonLabel: 'Read Essay',
+                    title: 'YouTube University & My First Real Design Gig',
+                    subtitle: 'How a summer of teaching myself Photoshop turned an MPA internship into the start of a career in design and technology.',
+                    date: 'Nov 2026',
+                    readTime: '3 min read',
+                    category: 'Origin Story',
+                    content: `
+                        <p>When I walked into the Michigan Black Chamber of Commerce as an MPA intern, my official job description had almost nothing to do with visual design. But I had spent the entire summer glued to YouTube tutorials, learning layers, masking, and typography in Adobe Photoshop.</p>
+                        <p>Instead of waiting for someone to hand me a creative title, I just raised my hand and asked if I could put those skills to work for the team.</p>
+                        <blockquote>"Nobody hands you permission to become a builder. You just start making things useful for the people around you until it becomes who you are."</blockquote>
+                        <h3>Learning in Public</h3>
+                        <p>Looking back at those early files, the kerning wasn't perfect and my layer organization was chaos—but shipping real work for an organization supporting Black-owned businesses taught me more in a few months than any textbook ever could.</p>
+                        <p>To add an essay like this to any other card on your site, just copy this <code>essay: { ... }</code> block in your code and paste it into any project inside <code>projectsData</code>.</p>
+                    `
+                }
             },
             'uber': {
                 title: 'UberxHarlem Business Alliance',
@@ -630,16 +743,16 @@
                 link: '#'
             },
             'bronxchange': {
-                title: 'Mobile App Design',
-                role: 'UI/UX Designer',
+                title: 'Bronxchange',
+                role: 'Designer',
                 tech: ['React Native', 'Expo', 'Figma', 'Redux'],
                 description: 'Designed and prototyped a cross-platform mobile application for event management. The implementation focused on native feel, smooth transitions, and state management optimization for large datasets.',
                 imageUrl: 'images/work-5.jpg', 
                 link: '#'
             },
             'blackstudent10': {
-                title: 'Procedural Art Generator',
-                role: 'Creative Coder',
+                title: 'Protester',
+                role: 'Designer',
                 tech: ['Three.js', 'JavaScript', 'Shaders'],
                 description: 'An ongoing personal experiment into algorithmic art generation using WebGL and custom fragment shaders. The goal is to create endless, unique, high-resolution digital wallpapers based on user-defined parameters.',
                 imageUrl: 'images/work-6.jpg', 
@@ -713,7 +826,7 @@
                 role: 'Personal',
                 tech: ['Interior Design'],
                 description: 'A look into my personal apartment aesthetic.',
-                imageUrl: 'images/play-7.jpg', 
+                imageUrl: 'images/play-5.jpg', 
                 link: '#'
             },
             'hoops': {
@@ -721,14 +834,14 @@
                 role: 'Athlete',
                 tech: ['Basketball'],
                 description: 'One of the things that make travel so special is the humans you get to connect with. While I still speak pretty awful Spanish, it has been really amazing to connect with people from other parts of the world who just share a love for competing.',
-                imageUrl: 'images/play-8.jpg', 
+                imageUrl: 'images/play-6.jpg', 
                 link: '#'
             },
             'halcyon': { 
                 title: 'Halcyon Fellowship',
                 role: 'Fellow',
                 description: 'The Halcyon Fellowship took me to Washington DC for 2mos. On top of living in a historic mansion in the heart of the Georgetown, I trained for the 2024 NYC Marathon there and now have the National Mall forever etched in my brain.',
-                imageUrl: 'images/play-9.jpg', 
+                imageUrl: 'images/play-7.jpg', 
                 link: '#'
             },
             'sailing': {
@@ -736,7 +849,7 @@
                 role: 'Sailor',
                 tech: ['Sailing'],
                 description: 'Sailing competition and maritime adventures.',
-                imageUrl: 'images/play-10.jpg', 
+                imageUrl: 'images/play-8.jpg', 
                 link: '#'
             },
             'maine': {
@@ -744,15 +857,15 @@
                 role: 'Skipper',
                 tech: ['Social Impact'],
                 description: 'Another sailing adventure with Jim. If you weren\'t aware; lobsters scream when you boil them. I know they say that it\'s the air going through their shells but why do they clinch up when they die?',
-                imageUrl: 'images/play-12.jpg', 
+                imageUrl: 'images/play-9.jpg', 
                 link: '#'
             },
             'jim': {
-                title: 'All Aboard Chime',
+                title: 'All Aboard Chine',
                 role: 'Personal',
                 tech: ['Misc'],
                 description: 'Personal project exploration.',
-                imageUrl: 'images/play-13.jpg', 
+                imageUrl: 'images/play-10.jpg', 
                 link: '#'
             },
             'startupbus': {
@@ -768,10 +881,10 @@
                 role: 'Hacker',
                 tech: ['Hackathon', 'Travel'],
                 description: 'Was selected as 1 of 50 activists from around the country doing work in undocumented immigration to participate in a hackathon. Got to play basketball at midnight with a mentor of mine. In hindsight, I should have dunked on him.',
-                imageUrl: 'images/play-14.jpg', 
+                imageUrl: 'images/play-12.jpg', 
                 link: '#'
             },
-            'coder-sandbox': {
+            'argentina': {
                 title: 'Coder Sandbox',
                 role: 'Creative Coder',
                 tech: ['HTML/CSS', 'JS'],
@@ -784,6 +897,14 @@
                 role: 'Hacker',
                 tech: ['Hackathon'],
                 description: 'First time winning a hackathon! Fun fact, I was so broke at the time; We got a free trip to SF but I literally had $0 in my account. My friend, and former landlady luckily leant me enough money for the hotel deductible and some decent chinese.',
+                imageUrl: 'images/play-14.jpg', 
+                link: '#'
+            },
+            'ceviche': {
+                title: 'Peru 2025',
+                role: 'Travel',
+                tech: ['Travel'],
+                description: 'Something in the Ceviche.',
                 imageUrl: 'images/play-15.jpg', 
                 link: '#'
             }
@@ -805,6 +926,7 @@
         const toggleSecondary = document.getElementById('toggle-secondary');
         const scrollFlashText = document.getElementById('scroll-flash-text');
 
+        // Project Modal Elements
         const projectModal = document.getElementById('project-modal');
         const modalTitle = document.getElementById('modal-title');
         const modalRole = document.getElementById('modal-role');
@@ -812,7 +934,20 @@
         const modalImage = document.getElementById('modal-image');
         const modalTechStack = document.getElementById('modal-tech-stack');
         const modalLiveLink = document.getElementById('modal-live-link');
+        const modalEssayBtn = document.getElementById('modal-essay-btn');
+        const modalEssayBtnText = document.getElementById('modal-essay-btn-text');
         const modalContent = projectModal.querySelector('.modal-content');
+
+        // Essay Modal Elements
+        const essayModal = document.getElementById('essay-modal');
+        const essayModalContent = essayModal.querySelector('.essay-modal-content');
+        const essayScrollContainer = document.getElementById('essay-scroll-container');
+        const essayModalTitle = document.getElementById('essay-modal-title');
+        const essayModalSubtitle = document.getElementById('essay-modal-subtitle');
+        const essayModalDate = document.getElementById('essay-modal-date');
+        const essayModalReadTime = document.getElementById('essay-modal-readtime');
+        const essayModalCategory = document.getElementById('essay-modal-category');
+        const essayModalBody = document.getElementById('essay-modal-body');
         
         // CONTACT ELEMENTS
         const contactLink = document.getElementById('contact-link');
@@ -821,6 +956,7 @@
         // --- State ---
         let isPanelOpen = false;
         let typewriterExecuted = false;
+        let activeProjectId = null;
 
         // --- Functions ---
         function openModal(projectId) {
@@ -829,6 +965,8 @@
                 console.error('Project data missing for ID:', projectId);
                 return;
             }
+
+            activeProjectId = projectId;
 
             modalTitle.textContent = project.title;
             modalRole.textContent = `Role: ${project.role}`;
@@ -842,6 +980,19 @@
                 ).join('');
             } else {
                 modalTechStack.innerHTML = '';
+            }
+
+            // Original View Live Project link stays visible unless `hideLiveLink: true` is set on the item
+            modalLiveLink.style.display = project.hideLiveLink ? 'none' : 'inline-flex';
+
+            // Only show the Read Essay button if an `essay` object exists on this project
+            if (project.essay) {
+                modalEssayBtn.classList.remove('hidden');
+                modalEssayBtn.classList.add('inline-flex');
+                modalEssayBtnText.textContent = project.essay.buttonLabel || 'Read Essay';
+            } else {
+                modalEssayBtn.classList.add('hidden');
+                modalEssayBtn.classList.remove('inline-flex');
             }
 
             projectModal.classList.remove('hidden-modal');
@@ -862,6 +1013,54 @@
             setTimeout(() => {
                 projectModal.classList.add('hidden-modal');
             }, 300); 
+        }
+
+        // --- Essay Modal Functions ---
+        function openEssayFromProject() {
+            if (!activeProjectId || !projectsData[activeProjectId]?.essay) return;
+
+            const essay = projectsData[activeProjectId].essay;
+
+            essayModalTitle.textContent = essay.title;
+            essayModalSubtitle.textContent = essay.subtitle || '';
+            essayModalDate.textContent = essay.date || '2026';
+            essayModalReadTime.textContent = essay.readTime || '3 min read';
+            essayModalCategory.textContent = essay.category || projectsData[activeProjectId].title;
+            essayModalBody.innerHTML = essay.content;
+
+            // Transition smoothly from Project Modal to Essay Modal
+            modalContent.classList.add('scale-95', 'opacity-0');
+            projectModal.style.opacity = '0';
+            setTimeout(() => {
+                projectModal.classList.add('hidden-modal');
+            }, 250);
+
+            essayScrollContainer.scrollTop = 0;
+            essayModal.classList.remove('hidden-modal');
+            essayModalContent.offsetWidth;
+            essayModalContent.classList.remove('scale-95', 'opacity-0');
+            essayModal.style.opacity = '1';
+        }
+
+        function closeEssayModal(event) {
+            if (event && event.target.closest('.essay-modal-content') && !event.target.closest('#essay-close-btn')) {
+                return;
+            }
+            essayModalContent.classList.add('scale-95', 'opacity-0');
+            essayModal.style.opacity = '0';
+
+            setTimeout(() => {
+                essayModal.classList.add('hidden-modal');
+            }, 300);
+        }
+
+        function returnToProjectModal() {
+            closeEssayModal();
+            if (activeProjectId) {
+                setTimeout(() => {
+                    openModal(activeProjectId);
+                }, 150);
+            }
         }
 
         function openContactDialog(e) {
@@ -941,6 +1140,7 @@
         credentialsBtn.addEventListener('click', toggleCredentialsPanel);
         togglePrimary.addEventListener('click', () => toggleMarquee('primary'));
         toggleSecondary.addEventListener('click', () => toggleMarquee('secondary'));
+        modalEssayBtn.addEventListener('click', openEssayFromProject);
         
         contactLink.addEventListener('click', openContactDialog);
 
@@ -954,7 +1154,9 @@
         
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
-                if (!projectModal.classList.contains('hidden-modal')) {
+                if (!essayModal.classList.contains('hidden-modal')) {
+                    closeEssayModal();
+                } else if (!projectModal.classList.contains('hidden-modal')) {
                     closeModal();
                 }
                 if (contactDialog.open) {
